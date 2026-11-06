@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import type { LegalDocKey } from "@/lib/brand"
 
 export type SettingsTab = "models" | "general" | "drawing" | "about"
 /** The models tab: its provider list, the provider picker or a provider */
@@ -18,6 +19,14 @@ interface UiState {
     /** Version shown in the compare dialog, or null when closed */
     compareVersionId: string | null
     saveDialogOpen: boolean
+    /** Commercial SaaS modals */
+    pricingOpen: boolean
+    betaNoticeOpen: boolean
+    selectedPlanName: string | null
+    legalOpen: boolean
+    legalTab: LegalDocKey
+    templatesModalOpen: boolean
+    docsModalOpen: boolean
     /** Bumped to ask the composer to take focus */
     focusComposerToken: number
     setPanelOpen: (open: boolean) => void
@@ -33,6 +42,13 @@ interface UiState {
     openCompare: (versionId: string) => void
     closeCompare: () => void
     setSaveDialogOpen: (open: boolean) => void
+    setPricingOpen: (open: boolean) => void
+    openBetaNotice: (planName?: string) => void
+    setBetaNoticeOpen: (open: boolean) => void
+    openLegal: (tab?: LegalDocKey) => void
+    setLegalOpen: (open: boolean) => void
+    setTemplatesModalOpen: (open: boolean) => void
+    setDocsModalOpen: (open: boolean) => void
     focusComposer: () => void
 }
 
@@ -45,6 +61,13 @@ export const useUiStore = create<UiState>((set) => ({
     modelsPage: "list",
     compareVersionId: null,
     saveDialogOpen: false,
+    pricingOpen: false,
+    betaNoticeOpen: false,
+    selectedPlanName: null,
+    legalOpen: false,
+    legalTab: "terms",
+    templatesModalOpen: false,
+    docsModalOpen: false,
     focusComposerToken: 0,
     setPanelOpen: (open) => set({ panelOpen: open }),
     setHeroDismissed: (dismissed) => set({ heroDismissed: dismissed }),
@@ -62,6 +85,21 @@ export const useUiStore = create<UiState>((set) => ({
     openCompare: (versionId) => set({ compareVersionId: versionId }),
     closeCompare: () => set({ compareVersionId: null }),
     setSaveDialogOpen: (open) => set({ saveDialogOpen: open }),
+    setPricingOpen: (open) => set({ pricingOpen: open }),
+    openBetaNotice: (planName) =>
+        set({
+            betaNoticeOpen: true,
+            selectedPlanName: planName ?? "Pro Plan",
+        }),
+    setBetaNoticeOpen: (open) => set({ betaNoticeOpen: open }),
+    openLegal: (tab = "terms") =>
+        set({
+            legalOpen: true,
+            legalTab: tab,
+        }),
+    setLegalOpen: (open) => set({ legalOpen: open }),
+    setTemplatesModalOpen: (open) => set({ templatesModalOpen: open }),
+    setDocsModalOpen: (open) => set({ docsModalOpen: open }),
     focusComposer: () =>
         set((state) => ({
             panelOpen: true,

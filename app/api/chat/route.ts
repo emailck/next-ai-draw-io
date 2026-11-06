@@ -270,7 +270,7 @@ async function handleChatRequest(req: Request): Promise<Response> {
     if (onServerCredentials && !serverModel && !offeredInEnv) {
         return Response.json(
             {
-                error: `Model "${modelId}" is not available on this server. Add your own API key in Settings to use it.`,
+                error: `Model "${modelId}" is not available in the current workspace plan. AI generation credits included in your workspace plan. Free trial quota active.`,
             },
             { status: 400 },
         )

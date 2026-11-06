@@ -2,6 +2,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
 import { Workspace } from "@/components/workspace/workspace"
+import { BRAND_DESCRIPTION, BRAND_TITLE } from "@/lib/brand"
 import { getDictionary, hasLocale } from "@/lib/i18n/dictionaries"
 
 export default async function Home({
@@ -20,8 +21,8 @@ export default async function Home({
                 HTML is otherwise empty for crawlers that do not run
                 JavaScript. Visually hidden; it repeats the start screen. */}
             <div className="sr-only">
-                <h1>Next AI Draw.io</h1>
-                <p>{dict.lobby.lede}</p>
+                <h1>{BRAND_TITLE}</h1>
+                <p>{BRAND_DESCRIPTION}</p>
                 <Link href={`/${lang}/about`}>{dict.settings.tabAbout}</Link>
             </div>
             {/* The workspace reads ?session= from the URL, which needs a

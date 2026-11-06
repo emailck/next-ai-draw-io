@@ -1,7 +1,7 @@
 {
-    "name": "next-ai-draw-io",
-    "version": "0.5.1",
-    "license": "Apache-2.0",
+    "name": "aicoco-studio",
+    "version": "1.0.0",
+    "license": "UNLICENSED",
     "private": true,
     "main": "dist-electron/main/index.js",
     "scripts": {

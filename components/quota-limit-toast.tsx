@@ -1,10 +1,11 @@
 "use client"
 
-import { Coffee, Settings, X } from "lucide-react"
+import { CreditCard, Settings, Sparkles, X } from "lucide-react"
 import type React from "react"
-import { GitHubIcon } from "@/components/icons/github"
 import { useDictionary } from "@/hooks/use-dictionary"
+import { BRAND_QUOTA_NOTICE } from "@/lib/brand"
 import { formatMessage } from "@/lib/i18n/utils"
+import { useUiStore } from "@/stores/ui-store"
 
 interface QuotaLimitToastProps {
     type?: "request" | "token"
@@ -23,15 +24,12 @@ export function QuotaLimitToast({
 }: QuotaLimitToastProps) {
     const dict = useDictionary()
     const isTokenLimit = type === "token"
-    const isSelfHosted = process.env.NEXT_PUBLIC_SELFHOSTED === "true"
     const formatNumber = (n: number) =>
         n >= 1000 ? `${(n / 1000).toFixed(1)}k` : n.toString()
 
     const quotaMessage = isTokenLimit
         ? dict.quota.messageToken
         : dict.quota.messageApi
-
-    const tipHtml = isSelfHosted ? dict.quota.tipSelfHosted : dict.quota.tip
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === "Escape") {
@@ -58,9 +56,9 @@ export function QuotaLimitToast({
             </button>
             {/* Title row with icon */}
             <div className="flex items-center gap-2.5 mb-3 pr-6">
-                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-                    <Coffee
-                        className="w-4 h-4 text-accent-foreground"
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                    <Sparkles
+                        className="w-4 h-4 text-blue-600 dark:text-blue-400"
                         strokeWidth={2}
                     />
                 </div>
@@ -79,15 +77,24 @@ export function QuotaLimitToast({
             {/* Message */}
             <div className="text-sm text-muted-foreground leading-relaxed mb-4 space-y-2">
                 <p>{quotaMessage}</p>
-                <p
-                    dangerouslySetInnerHTML={{
-                        __html: tipHtml,
-                    }}
-                />
+                <p className="font-medium text-foreground">
+                    {BRAND_QUOTA_NOTICE}
+                </p>
                 <p>{dict.quota.reset}</p>
-            </div>{" "}
+            </div>
             {/* Action buttons */}
             <div className="flex items-center gap-2">
+                <button
+                    type="button"
+                    onClick={() => {
+                        useUiStore.getState().setPricingOpen(true)
+                        onDismiss()
+                    }}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 transition-colors"
+                >
+                    <CreditCard className="w-3.5 h-3.5" />
+                    Upgrade to Pro
+                </button>
                 {onConfigModel && (
                     <button
                         type="button"
@@ -95,33 +102,11 @@ export function QuotaLimitToast({
                             onConfigModel()
                             onDismiss()
                         }}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border text-foreground hover:bg-muted transition-colors"
                     >
                         <Settings className="w-3.5 h-3.5" />
                         {dict.quota.configModel}
                     </button>
-                )}
-                {!isSelfHosted && (
-                    <>
-                        <a
-                            href="https://github.com/DayuanJiang/next-ai-draw-io"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border text-foreground hover:bg-muted transition-colors"
-                        >
-                            <GitHubIcon className="w-3.5 h-3.5" />
-                            {dict.quota.selfHost}
-                        </a>
-                        <a
-                            href="https://github.com/sponsors/DayuanJiang"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border text-foreground hover:bg-muted transition-colors"
-                        >
-                            <Coffee className="w-3.5 h-3.5" />
-                            {dict.quota.sponsor}
-                        </a>
-                    </>
                 )}
             </div>
         </div>

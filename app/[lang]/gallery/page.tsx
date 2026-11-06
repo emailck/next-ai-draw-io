@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Gallery } from "@/components/site/gallery"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteHeader } from "@/components/site/site-header"
+import { BRAND_NAME } from "@/lib/brand"
 import type { Locale } from "@/lib/i18n/config"
 import { hasLocale } from "@/lib/i18n/dictionaries"
 import { localeAlternates, OG_IMAGE, OG_LOCALE } from "@/lib/seo"
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const locale = localeOf((await params).lang)
     const t = TEXTS[locale]
     return {
-        title: `${t.title} | Next AI Draw.io`,
+        title: `${t.title} | ${BRAND_NAME}`,
         description: t.description,
         keywords: t.keywords,
         alternates: localeAlternates(locale, "/gallery"),
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: t.description,
             type: "website",
             url: `/${locale}/gallery`,
-            siteName: "Next AI Draw.io",
+            siteName: BRAND_NAME,
             locale: OG_LOCALE[locale],
             images: [{ ...OG_IMAGE, alt: t.title }],
         },

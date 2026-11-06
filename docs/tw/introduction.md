@@ -1,44 +1,34 @@
 # 簡介
 
-Next AI Draw.io 讓您透過和 AI 對話來繪製和修改 draw.io 圖表。您描述一張圖，AI 就在真正的 draw.io 畫布上把它畫出來；之後您可以手動繼續修改，也可以讓 AI 修改。AI 的每次修改都會被框出來，並儲存為一個可以還原的版本。
+AICoco Studio（AICoco Architecture）是面向全球軟體工程師、系統架構師與 DevOps 團隊的商業化 AI 雲端架構與系統拓撲設計平台。只需用自然語言描述您的雲端架構或系統拓撲，AICoco Studio 即可在互動式向量畫布上即時產生可編輯的架構圖，且每次迭代均自動儲存為可回溯的版本快照。
 
 <!-- demo: tour -->
 
-## 三種使用方式
+## 三種核心工作流
 
-| 在哪裡用 | 您會得到什麼 | 從這裡開始 |
+| 使用場景 | 核心能力 | 快速開始 |
 |---|---|---|
-| 在瀏覽器裡 | next-ai-drawio.jiang.jp 上的編輯器。無需安裝；填入自己的 API Key，就不受展示網站每日額度的限制 | [開啟編輯器](https://next-ai-drawio.jiang.jp/) |
-| 在桌面上 | 同一個應用程式，支援 Windows、macOS 和 Linux | [最新版本](https://github.com/DayuanJiang/next-ai-draw-io/releases/latest) |
-| 在 AI 代理裡 | 一個 MCP 伺服器：Claude Code、Cursor、Codex 和 VS Code 根據您專案裡的檔案，在您瀏覽器裡的同一塊畫布上畫圖 | [在 Claude Code 裡使用](./claude-code.md) |
+| 雲端向量工作台 | 瀏覽器即開即用的互動式架構畫布。AI generation credits included in your workspace plan. Free trial quota active. | [啟動 AICoco Studio](/zh-Hant) |
+| 企業級雲端架構模板庫 | 預置 AWS、GCP、Azure、Kubernetes 與 UML 生產級架構藍圖 | [瀏覽架構模板](/zh-Hant/gallery) |
+| IDE 與智慧體 MCP 整合 | 支援 Claude Code、Cursor、Codex 和 VS Code 根據程式碼庫直接產生即時架構圖 | [在 Claude Code 裡使用](./claude-code.md) |
 
-## 您可以做什麼
+## 核心功能
 
-- **產生**：用文字描述一張圖，或者從截圖、白板照片、PDF 或網頁開始。
-- **手動編輯**：畫布就是 draw.io 編輯器。您可以像在 draw.io 裡一樣移動圖形、更改樣式和新增圖形。
-- **讓 AI 修改**：選取幾個圖形，讓 AI 只改這些圖形；也可以讓 AI 修改整張圖。AI 會先讀取您手動做的修改。
-- **回到之前的版本**：AI 的每次修改都會在聊天裡產生一張版本卡片。您可以復原最近一次修改，把某個版本和畫布比較，或者還原更早的版本。
-- **匯出**：儲存為 `.drawio` 檔案，以便在 draw.io 裡繼續編輯；也可以匯出 PNG 或 SVG。
+- **智慧產生**：用自然語言描述架構，或從架構截圖、白板照片、PDF 技術方案及網頁逆向產生。
+- **精細手繪與調整**：完整相容標準向量編輯與 AWS、GCP、Azure、Kubernetes 官方圖示庫。
+- **局部 AI 增量精修**：框選特定子網路或微服務節點，讓 AI 僅針對選取區域重繪或擴容，完整保留您的手動調整。
+- **版本快照與比較**：每次 AI 修改都會產生版本卡片，支援與目前畫布並排比較或一鍵還原。
+- **多格式匯出**：支援匯出 `.drawio` 原始碼檔案、高解析度 PNG 與無損 SVG 向量圖。
 
-## 工作原理
+## 工作區訂閱方案與額度
 
-一張圖表就是一段 draw.io XML。應用程式會把您的請求和目前的圖表傳送給您選擇的 AI 模型，模型傳回新的或修改後的 XML，畫布會邊接收邊顯示。draw.io 編輯器隨應用程式一起打包，所以應用程式可以直接控制它，並讀回您的修改。
-
-應用程式使用以下技術建置：
-
-- **Next.js**：頁面和 API
-- **Vercel AI SDK**（`ai` 和 `@ai-sdk/*`）：以串流方式從多家 AI 服務商取得回答
-- **draw.io**：編輯器
-
-## AI 服務商
-
-展示網站有每日用量限制。您可以在「設定」裡選擇其他服務商，並填入自己的 Key；Key 儲存在您的瀏覽器裡，不會存到伺服器上。自己架設應用程式時，用環境變數設定服務商，見 [AI 服務商](./ai-providers.md)。
+AI generation credits included in your workspace plan. Free trial quota active. 您可以在[訂閱方案](/zh-Hant/about#pricing)頁面查看 Starter、Pro 與 Team 方案詳情，或參考 [AI 服務商](./ai-providers.md) 設定企業專屬模型閘道。
 
 ## 下一步
 
-- 在網頁版裡[繪製和編輯](./editor.md)
+- 在工作台裡[繪製和編輯](./editor.md)
 - [版本與復原](./versions.md)
 - [在 Claude Code 裡使用](./claude-code.md)，或在[其他 MCP 用戶端](./mcp-clients.md)裡使用
 - [AWS 架構圖](./aws-architecture.md)，以及[流程圖和時序圖](./flowcharts.md)
-- [使用 Docker 執行](./docker.md)
+- [使用 Docker 部署](./docker.md)
 - [常見問題解答](./FAQ.md)

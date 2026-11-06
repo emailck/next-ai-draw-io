@@ -8,47 +8,41 @@ import { PromoVideo } from "@/components/site/promo-video"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteHeader } from "@/components/site/site-header"
 import {
-    GITHUB_URL,
     MCP_CURSOR_INSTALL_URL,
     MCP_INSTALL,
     MCP_VSCODE_INSTALL_URL,
     NPM_URL,
     SITE_TEXTS,
 } from "@/components/site/site-texts"
+import { BRAND_NAME } from "@/lib/brand"
 import type { Locale } from "@/lib/i18n/config"
 import { hasLocale } from "@/lib/i18n/dictionaries"
 import { localeAlternates, OG_IMAGE, OG_LOCALE, SITE_URL } from "@/lib/seo"
 import { type InstallTab, InstallTabs } from "./install-tabs"
 import { TEXTS } from "./texts"
 
-const PACKAGE = "npx @next-ai-drawio/mcp-server@latest"
+const PACKAGE = "npx @aicoco/mcp-server@latest"
 
 const CODEX_TOML = `[mcp_servers.drawio]
 command = "npx"
-args = ["@next-ai-drawio/mcp-server@latest"]
+args = ["@aicoco/mcp-server@latest"]
 default_tools_approval_mode = "approve"`
 
 const VSCODE_JSON = `{
   "servers": {
-    "drawio": { "type": "stdio", "command": "npx", "args": ["@next-ai-drawio/mcp-server@latest"] }
+    "drawio": { "type": "stdio", "command": "npx", "args": ["@aicoco/mcp-server@latest"] }
   }
 }`
 
 const OTHERS_JSON = `{
   "mcpServers": {
-    "drawio": { "command": "npx", "args": ["@next-ai-drawio/mcp-server@latest"] }
+    "drawio": { "command": "npx", "args": ["@aicoco/mcp-server@latest"] }
   }
 }`
 
 // The servers' pages, in the order of the comparison rows, as linked from
 // the MCP server README
-const COMPARE_LINKS = [
-    NPM_URL,
-    "https://github.com/jgraph/drawio-mcp",
-    undefined,
-    undefined,
-    "https://github.com/lgazo/drawio-mcp-server",
-]
+const COMPARE_LINKS = [NPM_URL, undefined, undefined, undefined, undefined]
 
 // The tools, in the order of their texts
 const TOOLS = [
@@ -65,7 +59,7 @@ const TOOLS = [
     ["list_pages", "add_page", "rename_page", "delete_page"],
 ]
 
-const README_URL = `${GITHUB_URL}/tree/main/packages/mcp-server#readme`
+const README_URL = "/en/docs/mcp-server"
 
 type Props = { params: Promise<{ lang: string }> }
 
@@ -77,7 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const locale = localeOf((await params).lang)
     const t = TEXTS[locale]
     return {
-        title: `${t.title} | Next AI Draw.io`,
+        title: `${t.title} | ${BRAND_NAME}`,
         description: t.description,
         keywords: t.keywords,
         alternates: localeAlternates(locale, "/mcp"),
@@ -86,7 +80,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: t.description,
             type: "website",
             url: `/${locale}/mcp`,
-            siteName: "Next AI Draw.io",
+            siteName: BRAND_NAME,
             locale: OG_LOCALE[locale],
             images: [{ ...OG_IMAGE, alt: t.title }],
         },
@@ -112,7 +106,7 @@ export default async function Mcp({ params }: Props) {
                 { note: t.notes.claudeScope },
                 { note: t.notes.claudePlugin },
                 {
-                    code: "/plugin install next-ai-drawio --marketplace anthropics/claude-plugins-community",
+                    code: "/plugin install aicoco-studio --marketplace anthropics/claude-plugins-community",
                 },
             ],
         },
@@ -173,22 +167,20 @@ export default async function Mcp({ params }: Props) {
                 data={{
                     "@context": "https://schema.org",
                     "@type": "SoftwareApplication",
-                    name: "Next AI Draw.io MCP Server",
-                    alternateName: "@next-ai-drawio/mcp-server",
+                    name: `${BRAND_NAME} MCP Server`,
+                    alternateName: "@aicoco/mcp-server",
                     applicationCategory: "DeveloperApplication",
                     operatingSystem: "Windows, macOS, Linux",
                     softwareRequirements: "Node.js 18 or later",
                     description: t.description,
                     url: `${SITE_URL}/${lang}/mcp`,
                     downloadUrl: NPM_URL,
-                    license: "https://www.apache.org/licenses/LICENSE-2.0",
                     isAccessibleForFree: true,
                     offers: {
                         "@type": "Offer",
                         price: "0",
                         priceCurrency: "USD",
                     },
-                    sameAs: [README_URL, NPM_URL],
                     inLanguage: lang,
                 }}
             />

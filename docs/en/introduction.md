@@ -1,44 +1,34 @@
 # Introduction
 
-Next AI Draw.io draws and edits draw.io diagrams by chatting with an AI. You describe a diagram, the AI draws it on a real draw.io canvas, and you keep working on it by hand or by asking for changes. Every change the AI makes is outlined and saved as a version you can restore.
+AICoco Studio (AICoco Architecture) is an AI-powered cloud architecture and diagramming platform for software engineers, solutions architects, and DevOps teams. Describe your cloud topology or system architecture in natural language, and AICoco Studio generates an editable vector diagram on an interactive draw.io canvas. Every AI iteration is versioned and restorable.
 
 <!-- demo: tour -->
 
-## Three ways to use it
+## Three ways to work with AICoco Studio
 
-| Where | What you get | Start here |
+| Environment | Capabilities | Quick Start |
 |---|---|---|
-| In the browser | The editor at next-ai-drawio.jiang.jp. Nothing to install; add your own API key to lift the demo's daily limit | [Open the editor](https://next-ai-drawio.jiang.jp/) |
-| On your desktop | The same app for Windows, macOS and Linux | [Latest release](https://github.com/DayuanJiang/next-ai-draw-io/releases/latest) |
-| In your AI agent | An MCP server: Claude Code, Cursor, Codex and VS Code draw from your project's files on the same canvas, in your browser | [Use it from Claude Code](./claude-code.md) |
+| Cloud Studio Workspace | Browser-based interactive vector canvas. AI generation credits included in your workspace plan. Free trial quota active. | [Launch AICoco Studio](/en) |
+| Architecture Templates | Pre-built enterprise cloud topologies for AWS, GCP, Azure, Kubernetes, and UML | [Browse Templates](/en/gallery) |
+| IDE & Agent MCP Server | Connect Claude Code, Cursor, Codex, and VS Code directly to your live architecture canvas | [Use it from Claude Code](./claude-code.md) |
 
-## What you can do
+## Core Capabilities
 
-- **Generate**: describe a diagram in words, or start from a screenshot, a whiteboard photo, a PDF or a web page.
-- **Edit by hand**: the canvas is the draw.io editor. Move, restyle and add shapes as you would in draw.io.
-- **Edit with AI**: select shapes and ask for a change to just those, or ask for a change to the whole diagram. The AI reads your hand edits first.
-- **Go back**: every AI change becomes a version card in the chat. Undo the latest change, compare a version with the canvas, or restore an older one.
-- **Export**: save a `.drawio` file to keep editing in draw.io, or export PNG or SVG.
+- **Generate**: Describe a cloud topology in natural language, or upload an architecture screenshot, whiteboard photo, RFC PDF, or URL.
+- **Edit by hand**: Full vector editing canvas powered by the draw.io engine with official AWS, GCP, Azure, and Kubernetes shape libraries.
+- **Targeted AI refinement**: Select specific nodes or subnets and instruct the AI to update only those components while preserving manual edits.
+- **Version history & diff**: Every AI iteration creates an immutable snapshot card. Compare versions side-by-side or roll back with one click.
+- **Export**: Export standard `.drawio` XML, scalable vector SVG, or high-resolution PNG for technical RFCs and compliance documentation.
 
-## How it works
+## Workspace Plans & AI Credits
 
-A diagram is draw.io XML. The app sends your request and the current diagram to the AI model you picked, and the model answers with new or changed XML, which the canvas shows as it arrives. The draw.io editor is bundled with the app, so the app can drive it directly and read your edits back.
-
-The app is built with:
-
-- **Next.js** for the pages and the API
-- **Vercel AI SDK** (`ai` and `@ai-sdk/*`) to stream answers from many AI providers
-- **draw.io** as the editor
-
-## AI providers
-
-The demo site has a daily usage limit. In Settings you can pick another provider and enter your own key; the key is kept in your browser and never stored on the server. When you host the app yourself, you set up providers with environment variables: see [AI providers](./ai-providers.md).
+AI generation credits included in your workspace plan. Free trial quota active. You can view our Starter, Pro, and Team subscription tiers on the [Pricing Plans](/en/about#pricing) page, or configure custom enterprise model gateways in [AI providers](./ai-providers.md).
 
 ## Next steps
 
-- [Draw and edit](./editor.md) in the web app
+- [Draw and edit](./editor.md) in the web workspace
 - [Versions and undo](./versions.md)
 - [Use it from Claude Code](./claude-code.md) or [other MCP clients](./mcp-clients.md)
 - [AWS architecture diagrams](./aws-architecture.md) and [flowcharts and sequence diagrams](./flowcharts.md)
-- [Run with Docker](./docker.md)
+- [Enterprise Docker deployment](./docker.md)
 - [FAQ](./FAQ.md)

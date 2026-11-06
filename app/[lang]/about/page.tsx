@@ -1,9 +1,10 @@
 import "@/components/site/site.css"
-import { Globe, Monitor, SquareTerminal } from "lucide-react"
+import { Globe, Layers, SquareTerminal } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "@/components/image-with-basepath"
 import { ProviderLogo } from "@/components/provider-logo"
+import { AboutPricingSection } from "@/components/saas/about-pricing-section"
 import { CopyCommand } from "@/components/site/copy-command"
 import { DemoPlayer } from "@/components/site/demo-player"
 import { demoTexts } from "@/components/site/demo-texts"
@@ -13,12 +14,8 @@ import {
 } from "@/components/site/gallery-items"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteHeader } from "@/components/site/site-header"
-import {
-    GITHUB_URL,
-    MCP_INSTALL,
-    RELEASES_URL,
-    SITE_TEXTS,
-} from "@/components/site/site-texts"
+import { MCP_INSTALL, SITE_TEXTS } from "@/components/site/site-texts"
+import { BRAND_NAME } from "@/lib/brand"
 import type { Locale } from "@/lib/i18n/config"
 import { hasLocale } from "@/lib/i18n/dictionaries"
 import { PROVIDER_NAMES, PROVIDERS } from "@/lib/providers"
@@ -44,8 +41,6 @@ function localeOf(lang: string): Locale {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const locale = localeOf((await params).lang)
     const t = TEXTS[locale]
-    // openGraph and twitter replace the layout's whole objects, so the
-    // shared fields are repeated here
     return {
         title: t.title,
         description: t.description,
@@ -56,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: t.description,
             type: "website",
             url: `/${locale}/about`,
-            siteName: "Next AI Draw.io",
+            siteName: BRAND_NAME,
             locale: OG_LOCALE[locale],
             images: [{ ...OG_IMAGE, alt: t.title }],
         },
@@ -81,9 +76,9 @@ export default async function About({ params }: Props) {
             href: `/${lang}`,
         },
         {
-            icon: Monitor,
+            icon: Layers,
             ...t.ways.desktop,
-            href: RELEASES_URL,
+            href: `/${lang}/gallery`,
         },
         {
             icon: SquareTerminal,
@@ -109,7 +104,6 @@ export default async function About({ params }: Props) {
                 <section className="mx-auto max-w-7xl px-4 pt-6 pb-10 md:px-8 md:pt-4 md:pb-12">
                     <div className="grid items-end gap-5 px-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12 md:px-0">
                         <h1 className="text-[clamp(32px,3.6vw,48px)] leading-[1.08] font-semibold tracking-[-0.035em] [text-wrap:balance]">
-                            {/* A Chinese headline breaks only after its comma */}
                             {t.h1.split(/(?<=，)/).map((part) => (
                                 <span key={part} className="inline-block">
                                     {part}
@@ -121,8 +115,6 @@ export default async function About({ params }: Props) {
                                 {t.lede}
                             </p>
                             <div className="mt-5 flex flex-wrap items-center gap-3">
-                                {/* The editor has no phone layout: a phone
-                                    gets the docs first */}
                                 <Link
                                     href={`/${lang}`}
                                     className="rounded-lg bg-foreground px-4.5 py-2.5 text-[14.5px] font-medium text-background max-md:hidden"
@@ -135,12 +127,12 @@ export default async function About({ params }: Props) {
                                 >
                                     {t.phonePrimary}
                                 </Link>
-                                <Link
-                                    href={`/${lang}/mcp`}
+                                <a
+                                    href="#pricing"
                                     className="rounded-lg border border-border bg-card px-4.5 py-2.5 text-[14.5px] font-medium hover:bg-muted"
                                 >
                                     {t.secondary}
-                                </Link>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -180,28 +172,20 @@ export default async function About({ params }: Props) {
                                             labels={site.copy}
                                         />
                                     )}
-                                    {/* Link adds the base path to the
-                                        site's own pages */}
-                                    {way.href.startsWith("/") ? (
-                                        <Link
-                                            href={way.href}
-                                            className="inline-block text-[15px] font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
-                                        >
-                                            {way.action}
-                                        </Link>
-                                    ) : (
-                                        <a
-                                            href={way.href}
-                                            className="inline-block text-[15px] font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
-                                        >
-                                            {way.action}
-                                        </a>
-                                    )}
+                                    <Link
+                                        href={way.href}
+                                        className="inline-block text-[15px] font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
+                                    >
+                                        {way.action}
+                                    </Link>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </section>
+
+                {/* Commercial SaaS Pricing Section */}
+                <AboutPricingSection />
 
                 {/* Examples */}
                 <section className="mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-16">
@@ -237,24 +221,13 @@ export default async function About({ params }: Props) {
                             {t.moreHeading}
                         </h2>
                         <div className="mt-8 grid gap-x-12 gap-y-7 sm:grid-cols-2 md:grid-cols-3 md:gap-y-9">
-                            {t.more.map((item, i) => (
+                            {t.more.map((item) => (
                                 <div key={item.title}>
                                     <h3 className="text-[15.5px] font-semibold">
                                         {item.title}
                                     </h3>
                                     <p className="mt-1.5 text-[14.5px] leading-relaxed text-muted-foreground">
                                         {item.text}
-                                        {i === t.more.length - 1 && (
-                                            <>
-                                                {" "}
-                                                <Link
-                                                    href={`/${lang}/docs/docker`}
-                                                    className="font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
-                                                >
-                                                    {t.selfHostLink}
-                                                </Link>
-                                            </>
-                                        )}
                                     </p>
                                 </div>
                             ))}
@@ -307,10 +280,10 @@ export default async function About({ params }: Props) {
                                 {t.phonePrimary}
                             </Link>
                             <a
-                                href={GITHUB_URL}
+                                href="#pricing"
                                 className="rounded-lg border border-border bg-card px-4.5 py-2.5 text-[14.5px] font-medium hover:bg-muted"
                             >
-                                GitHub
+                                {t.secondary}
                             </a>
                         </div>
                     </div>

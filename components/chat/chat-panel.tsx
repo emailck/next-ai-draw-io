@@ -1,5 +1,6 @@
 import {
     ChevronDown,
+    CreditCard,
     Download,
     FilePlus,
     LayoutGrid,
@@ -20,6 +21,7 @@ import { ButtonTooltip, IconButton } from "@/components/workspace/icon-button"
 import { useDiagram } from "@/contexts/diagram-context"
 import { useDictionary } from "@/hooks/use-dictionary"
 import { usePanelWidth } from "@/hooks/use-panel-width"
+import { BRAND_BADGE, SUPPORT_EMAIL } from "@/lib/brand"
 import { modKey } from "@/lib/platform"
 import { cn } from "@/lib/utils"
 import {
@@ -188,6 +190,15 @@ export function ChatPanel({
                         </ButtonTooltip>
                     )}
                     <IconButton
+                        label="Subscription Plans"
+                        onClick={() =>
+                            useUiStore.getState().setPricingOpen(true)
+                        }
+                        data-testid="panel-pricing-button"
+                    >
+                        <CreditCard />
+                    </IconButton>
+                    <IconButton
                         label={dict.nav.newChat}
                         onClick={engine.newChat}
                         disabled={engine.isBusy}
@@ -227,7 +238,7 @@ export function ChatPanel({
                 />
             )}
 
-            <div className="shrink-0 px-4 pt-1 pb-3">
+            <div className="shrink-0 px-4 pt-1 pb-2.5">
                 <Composer
                     placeholder={
                         engine.messages.length > 0 &&
@@ -236,6 +247,48 @@ export function ChatPanel({
                             : undefined
                     }
                 />
+                <div className="mt-2 flex flex-wrap items-center justify-between gap-2 px-1 text-[11px] text-muted-foreground">
+                    <span className="inline-flex items-center gap-1.5">
+                        <span className="rounded bg-blue-500/10 px-1.5 py-0.2 text-[10px] font-semibold text-blue-600 dark:text-blue-400">
+                            {BRAND_BADGE}
+                        </span>
+                        <a
+                            href={`mailto:${SUPPORT_EMAIL}`}
+                            className="hover:text-foreground hover:underline"
+                        >
+                            {SUPPORT_EMAIL}
+                        </a>
+                    </span>
+                    <span className="flex items-center gap-2.5">
+                        <button
+                            type="button"
+                            onClick={() =>
+                                useUiStore.getState().openLegal("terms")
+                            }
+                            className="hover:text-foreground hover:underline"
+                        >
+                            Terms
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() =>
+                                useUiStore.getState().openLegal("privacy")
+                            }
+                            className="hover:text-foreground hover:underline"
+                        >
+                            Privacy
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() =>
+                                useUiStore.getState().openLegal("aup")
+                            }
+                            className="hover:text-foreground hover:underline"
+                        >
+                            AUP
+                        </button>
+                    </span>
+                </div>
             </div>
 
             {!mobile && <ResizeHandle />}

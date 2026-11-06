@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect } from "react"
 import { BrandMark } from "@/components/workspace/brand-mark"
+import { BRAND_NAME } from "@/lib/brand"
 import { i18n, type Locale } from "@/lib/i18n/config"
 
 const TEXTS: Record<
@@ -50,7 +51,7 @@ export function NotFoundPage() {
     const t = TEXTS[lang]
     // The server's title is in English: it cannot know the language
     useEffect(() => {
-        document.title = `${t.title} | Next AI Draw.io`
+        document.title = `${t.title} | ${BRAND_NAME}`
     }, [t.title])
     return (
         <div className="site lp-grid flex min-h-screen items-center justify-center bg-canvas px-6 text-foreground md:px-8">
@@ -61,7 +62,7 @@ export function NotFoundPage() {
                 >
                     <BrandMark className="size-7" />
                     <span className="text-[15px] font-semibold">
-                        Next AI Draw.io
+                        {BRAND_NAME}
                     </span>
                 </Link>
                 <p className="mt-10 font-mono text-[13px] text-muted-foreground">

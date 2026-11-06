@@ -1,9 +1,12 @@
 import {
+    CreditCard,
     Info,
+    Mail,
     Monitor,
     Moon,
     PenTool,
     Settings2,
+    ShieldCheck,
     Sparkles,
     Sun,
     Terminal,
@@ -13,7 +16,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { useChatEngine } from "@/components/chat/chat-engine"
-import { GitHubIcon } from "@/components/icons/github"
 import { ModelConfigDialog } from "@/components/model-config-dialog"
 import { SettingsHeader } from "@/components/settings/settings-header"
 import { Button } from "@/components/ui/button"
@@ -36,6 +38,15 @@ import { Textarea } from "@/components/ui/textarea"
 import { BrandMark } from "@/components/workspace/brand-mark"
 import { useDictionary } from "@/hooks/use-dictionary"
 import { getApiEndpoint } from "@/lib/base-path"
+import {
+    BRAND_ALT_NAME,
+    BRAND_BADGE,
+    BRAND_DESCRIPTION,
+    BRAND_NAME,
+    BRAND_QUOTA_NOTICE,
+    COMPANY_COPYRIGHT,
+    SUPPORT_EMAIL,
+} from "@/lib/brand"
 import { i18n, type Locale } from "@/lib/i18n/config"
 import { STORAGE_KEYS } from "@/lib/storage"
 import { cn } from "@/lib/utils"
@@ -507,23 +518,41 @@ function AboutTab() {
     const dict = useDictionary()
     const pathname = usePathname()
     const lang = pathname.split("/").filter(Boolean)[0] || i18n.defaultLocale
-    const showAbout = process.env.NEXT_PUBLIC_SHOW_ABOUT_AND_NOTICE === "true"
     const isSelfHosted = process.env.NEXT_PUBLIC_SELFHOSTED === "true"
     const aboutPath = `/${lang}/about`
+    const setSettingsOpen = useUiStore((s) => s.setSettingsOpen)
+    const setPricingOpen = useUiStore((s) => s.setPricingOpen)
+    const openLegal = useUiStore((s) => s.openLegal)
 
     return (
         <div className="space-y-5">
             <div className="flex items-center gap-3">
                 <BrandMark className="size-10 rounded-xl" />
                 <div>
-                    <div className="text-[15px] font-semibold">
-                        Next AI Draw.io
+                    <div className="flex items-center gap-2 text-[15px] font-semibold">
+                        <span>{BRAND_NAME}</span>
+                        <span className="rounded-md border border-blue-500/25 bg-blue-500/10 px-1.5 py-0.5 text-[10px] font-semibold text-blue-600 dark:text-blue-400">
+                            {BRAND_BADGE}
+                        </span>
                     </div>
                     <div className="text-xs text-muted-foreground">
-                        {dict.settings.appVersion} {process.env.APP_VERSION}
+                        {BRAND_ALT_NAME} · {dict.settings.appVersion}{" "}
+                        {process.env.APP_VERSION}
                     </div>
                 </div>
             </div>
+
+            <p className="text-xs leading-relaxed text-muted-foreground">
+                {BRAND_DESCRIPTION}
+            </p>
+
+            <div className="rounded-xl border border-blue-500/20 bg-blue-500/[0.05] p-3.5">
+                <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
+                    <ShieldCheck className="size-4 text-blue-600 dark:text-blue-400" />
+                    {BRAND_QUOTA_NOTICE}
+                </div>
+            </div>
+
             {/* MCP server card, hidden on self-hosted deployments */}
             {!isSelfHosted && (
                 <Link
@@ -546,26 +575,71 @@ function AboutTab() {
                 </Link>
             )}
             <div className="flex flex-wrap gap-2">
+                <button
+                    type="button"
+                    onClick={() => {
+                        setSettingsOpen(false)
+                        setPricingOpen(true)
+                    }}
+                    className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-3 text-xs font-semibold text-white hover:from-blue-700 hover:to-indigo-700"
+                >
+                    <CreditCard className="size-3.5" />
+                    View Subscription Plans
+                </button>
                 <a
-                    href="https://github.com/DayuanJiang/next-ai-draw-io"
+                    href={aboutPath}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-border px-3 text-xs text-muted-foreground hover:text-foreground"
                 >
-                    <GitHubIcon className="size-3.5" />
-                    GitHub
+                    <Info className="size-3.5" />
+                    {dict.settings.projectWebsite}
                 </a>
-                {showAbout && (
-                    <a
-                        href={aboutPath}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-border px-3 text-xs text-muted-foreground hover:text-foreground"
+                <a
+                    href={`mailto:${SUPPORT_EMAIL}`}
+                    className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-border px-3 text-xs text-muted-foreground hover:text-foreground"
+                >
+                    <Mail className="size-3.5" />
+                    Support: {SUPPORT_EMAIL}
+                </a>
+            </div>
+
+            <div className="border-t border-border pt-4 text-xs text-muted-foreground">
+                <p className="font-medium text-foreground/85">
+                    {COMPANY_COPYRIGHT}
+                </p>
+                <div className="mt-2 flex flex-wrap gap-3">
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setSettingsOpen(false)
+                            openLegal("terms")
+                        }}
+                        className="hover:text-foreground hover:underline"
                     >
-                        <Info className="size-3.5" />
-                        {dict.settings.projectWebsite}
-                    </a>
-                )}
+                        Terms of Service
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setSettingsOpen(false)
+                            openLegal("privacy")
+                        }}
+                        className="hover:text-foreground hover:underline"
+                    >
+                        Privacy Policy
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setSettingsOpen(false)
+                            openLegal("aup")
+                        }}
+                        className="hover:text-foreground hover:underline"
+                    >
+                        Acceptable Use Policy
+                    </button>
+                </div>
             </div>
         </div>
     )
@@ -642,6 +716,38 @@ export function SettingsDialog() {
                             </div>
                         </>
                     )}
+                    {/* Compliance footer at the bottom of the settings panel */}
+                    <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-border bg-surface-1 px-5 py-2.5 text-[11px] text-muted-foreground">
+                        <span className="truncate">{COMPANY_COPYRIGHT}</span>
+                        <div className="flex items-center gap-3">
+                            <a
+                                href={`mailto:${SUPPORT_EMAIL}`}
+                                className="hover:text-foreground hover:underline"
+                            >
+                                Support: {SUPPORT_EMAIL}
+                            </a>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setOpen(false)
+                                    useUiStore.getState().openLegal("terms")
+                                }}
+                                className="hover:text-foreground hover:underline"
+                            >
+                                Terms
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setOpen(false)
+                                    useUiStore.getState().openLegal("privacy")
+                                }}
+                                className="hover:text-foreground hover:underline"
+                            >
+                                Privacy
+                            </button>
+                        </div>
+                    </div>
                 </section>
             </DialogContent>
         </Dialog>

@@ -3,7 +3,6 @@ import {
     ChevronDown,
     ChevronLeft,
     ChevronRight,
-    SquarePen,
     TextAlignStart,
 } from "lucide-react"
 import type { Metadata } from "next"
@@ -15,7 +14,8 @@ import { DocsToc } from "@/components/site/docs-toc"
 import { JsonLd } from "@/components/site/json-ld"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteHeader } from "@/components/site/site-header"
-import { GITHUB_URL, SITE_TEXTS } from "@/components/site/site-texts"
+import { SITE_TEXTS } from "@/components/site/site-texts"
+import { BRAND_NAME } from "@/lib/brand"
 import { DOCS_NAV, DOCS_SLUGS, docsPath, fileOfSlug, loadDoc } from "@/lib/docs"
 import { i18n, type Locale } from "@/lib/i18n/config"
 import { hasLocale } from "@/lib/i18n/dictionaries"
@@ -26,7 +26,6 @@ const TEXTS: Record<
     {
         docs: string
         onThisPage: string
-        edit: string
         previous: string
         next: string
         /** Above a page shown in English */
@@ -38,7 +37,6 @@ const TEXTS: Record<
     en: {
         docs: "Docs",
         onThisPage: "On this page",
-        edit: "Edit this page on GitHub",
         previous: "Previous",
         next: "Next",
         inEnglish: "",
@@ -47,7 +45,6 @@ const TEXTS: Record<
     zh: {
         docs: "文档",
         onThisPage: "本页内容",
-        edit: "在 GitHub 上编辑此页",
         previous: "上一页",
         next: "下一页",
         inEnglish: "这一页还没有中文版，下面是英文原文。",
@@ -56,7 +53,6 @@ const TEXTS: Record<
     ja: {
         docs: "ドキュメント",
         onThisPage: "このページの内容",
-        edit: "GitHub でこのページを編集",
         previous: "前へ",
         next: "次へ",
         inEnglish:
@@ -66,7 +62,6 @@ const TEXTS: Record<
     "zh-Hant": {
         docs: "文件",
         onThisPage: "本頁內容",
-        edit: "在 GitHub 上編輯此頁",
         previous: "上一頁",
         next: "下一頁",
         inEnglish: "這一頁還沒有中文版，以下是英文原文。",
@@ -101,7 +96,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             .filter((locale) => loadDoc(locale, file).locale === locale)
             .map((locale) => [locale, `/${locale}${path}`]),
     )
-    const title = `${doc.title} | Next AI Draw.io ${TEXTS[doc.locale].docs}`
+    const title = `${doc.title} | ${BRAND_NAME} ${TEXTS[doc.locale].docs}`
     return {
         title,
         description: doc.summary,
@@ -115,7 +110,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: doc.summary,
             type: "article",
             url: `/${doc.locale}${path}`,
-            siteName: "Next AI Draw.io",
+            siteName: BRAND_NAME,
             // The language the text is in, as for the canonical URL
             locale: OG_LOCALE[doc.locale],
             images: [{ ...OG_IMAGE, alt: doc.title }],
@@ -158,7 +153,7 @@ export default async function DocsPage({ params }: Props) {
                         url,
                         isPartOf: {
                             "@type": "WebSite",
-                            name: "Next AI Draw.io",
+                            name: BRAND_NAME,
                             url: SITE_URL,
                         },
                     },
@@ -264,13 +259,6 @@ export default async function DocsPage({ params }: Props) {
                                 />
                             )}
                         </div>
-                        <a
-                            href={`${GITHUB_URL}/edit/main/${doc.repoPath}`}
-                            className="mt-6 inline-flex items-center gap-1.5 text-[13.5px] text-muted-foreground hover:text-foreground"
-                        >
-                            <SquarePen className="size-3.5" />
-                            {t.edit}
-                        </a>
                     </div>
                 </main>
 

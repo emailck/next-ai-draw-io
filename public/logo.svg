@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="aicoco-bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="50%" stop-color="#4F46E5" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+    <linearGradient id="aicoco-glow" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="100%" stop-color="#BFDBFE" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#aicoco-bg)" />
+  <rect x="2" y="2" width="60" height="60" rx="14" stroke="white" stroke-opacity="0.18" stroke-width="2" />
+  <!-- Cloud Architecture Hexagonal Topology -->
+  <path d="M32 14L48 23.2V41.6L32 50.8L16 41.6V23.2L32 14Z" stroke="url(#aicoco-glow)" stroke-width="3.2" stroke-linejoin="round" fill="white" fill-opacity="0.08" />
+  <!-- Internal Topology Connectors -->
+  <path d="M32 14V32M32 32L48 23.2M32 32L16 23.2M32 32V50.8" stroke="white" stroke-opacity="0.65" stroke-width="2.4" stroke-linecap="round" />
+  <!-- Topology Nodes -->
+  <circle cx="32" cy="14" r="3.8" fill="white" />
+  <circle cx="48" cy="23.2" r="3.8" fill="white" />
+  <circle cx="16" cy="23.2" r="3.8" fill="white" />
+  <circle cx="48" cy="41.6" r="3.4" fill="#DBEAFE" />
+  <circle cx="16" cy="41.6" r="3.4" fill="#DBEAFE" />
+  <circle cx="32" cy="50.8" r="3.8" fill="white" />
+  <!-- Central AI Core Spark -->
+  <circle cx="32" cy="32" r="5.5" fill="white" />
+  <circle cx="32" cy="32" r="2.5" fill="#2563EB" />
+</svg>

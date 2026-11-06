@@ -1,6 +1,12 @@
 "use client"
 
-import { MessageSquare, PanelRightOpen, Settings, Shapes } from "lucide-react"
+import {
+    CreditCard,
+    MessageSquare,
+    PanelRightOpen,
+    Shapes,
+    Sparkles,
+} from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { CanvasStage } from "@/components/canvas/canvas-stage"
@@ -13,10 +19,18 @@ import {
 import { ChatPanel } from "@/components/chat/chat-panel"
 import { ChatVersionsProvider } from "@/components/chat/chat-versions"
 import { LobbyHero } from "@/components/chat/lobby-hero"
+import { LegalModal } from "@/components/saas/legal-modal"
+import {
+    PricingModal,
+    PublicBetaModal,
+    QuickDocsModal,
+    TemplatesModal,
+} from "@/components/saas/pricing-modal"
+import { SaasFooter } from "@/components/saas/saas-footer"
+import { SaasHeader } from "@/components/saas/saas-header"
 import { SaveDialog } from "@/components/save-dialog"
 import { SettingsDialog } from "@/components/settings-dialog"
 import { BrandMark } from "@/components/workspace/brand-mark"
-import { DocsButton } from "@/components/workspace/docs-button"
 import { IconButton } from "@/components/workspace/icon-button"
 import { useDiagram } from "@/contexts/diagram-context"
 import { useDictionary } from "@/hooks/use-dictionary"
@@ -75,39 +89,6 @@ export function exportFilename(title: string | null): string {
         .slice(0, 80)
     // Local date (toISOString would give UTC)
     return name || `diagram-${new Date().toLocaleDateString("sv-SE")}`
-}
-
-/** App name, docs and settings buttons above the start screen */
-function StartBar({
-    className,
-    nameClassName,
-}: {
-    className: string
-    nameClassName: string
-}) {
-    const dict = useDictionary()
-    const openSettings = useUiStore((s) => s.openSettings)
-    return (
-        <div className={className}>
-            <BrandMark className="size-6" />
-            <span
-                className={cn(
-                    "text-[13px] font-semibold tracking-[-0.01em]",
-                    nameClassName,
-                )}
-            >
-                Next AI Draw.io
-            </span>
-            <DocsButton />
-            <IconButton
-                label={dict.nav.settings}
-                onClick={() => openSettings()}
-                data-testid="settings-button"
-            >
-                <Settings />
-            </IconButton>
-        </div>
-    )
 }
 
 /** The whole editor: canvas, chat panel, dialogs */
@@ -288,19 +269,19 @@ function WorkspaceLayout() {
                     {isMobile ? (
                         mobileView === "chat" &&
                         (showHero ? (
-                            <div className="absolute inset-0 overflow-y-auto bg-canvas">
-                                <StartBar
-                                    className="flex items-center gap-2 px-4 pt-3"
-                                    nameClassName="mr-auto"
-                                />
-                                <LobbyHero
-                                    compact
-                                    onOpenFile={openFile}
-                                    onDrawYourself={() => {
-                                        setHeroDismissed(true)
-                                        setMobileView("canvas")
-                                    }}
-                                />
+                            <div className="absolute inset-0 flex flex-col overflow-y-auto bg-canvas">
+                                <SaasHeader compact />
+                                <div className="flex-1">
+                                    <LobbyHero
+                                        compact
+                                        onOpenFile={openFile}
+                                        onDrawYourself={() => {
+                                            setHeroDismissed(true)
+                                            setMobileView("canvas")
+                                        }}
+                                    />
+                                </div>
+                                <SaasFooter />
                             </div>
                         ) : (
                             <ChatPanel mobile onOpenFile={openFile} />
@@ -317,6 +298,26 @@ function WorkspaceLayout() {
                                 <div className="absolute top-[60px] right-3 z-20 flex items-center gap-1 rounded-xl bg-card p-1 shadow-float animate-fade-in">
                                     <BrandMark className="mx-0.5 size-6" />
                                     <IconButton
+                                        label="Pricing & Plans"
+                                        onClick={() =>
+                                            useUiStore
+                                                .getState()
+                                                .setPricingOpen(true)
+                                        }
+                                    >
+                                        <CreditCard />
+                                    </IconButton>
+                                    <IconButton
+                                        label="Upgrade to Pro"
+                                        onClick={() =>
+                                            useUiStore
+                                                .getState()
+                                                .openBetaNotice("Pro Plan")
+                                        }
+                                    >
+                                        <Sparkles />
+                                    </IconButton>
+                                    <IconButton
                                         label={dict.nav.showPanel}
                                         shortcut={`${modKey}B`}
                                         onClick={() => setPanelOpen(true)}
@@ -328,20 +329,16 @@ function WorkspaceLayout() {
                             )}
 
                             {showHero && (
-                                <>
-                                    <div className="absolute inset-0 z-10 overflow-y-auto bg-canvas">
-                                        <div className="flex min-h-full items-center">
-                                            <LobbyHero
-                                                onOpenFile={openFile}
-                                                onDrawYourself={dismissHero}
-                                            />
-                                        </div>
+                                <div className="absolute inset-0 z-10 flex flex-col overflow-y-auto bg-canvas">
+                                    <SaasHeader className="sticky top-0 z-20" />
+                                    <div className="flex flex-1 items-center">
+                                        <LobbyHero
+                                            onOpenFile={openFile}
+                                            onDrawYourself={dismissHero}
+                                        />
                                     </div>
-                                    <StartBar
-                                        className="absolute top-3 left-3 z-20 flex items-center gap-1.5 rounded-xl bg-card py-1 pr-1 pl-1.5 shadow-float"
-                                        nameClassName="pr-1"
-                                    />
-                                </>
+                                    <SaasFooter />
+                                </div>
                             )}
                         </>
                     )}
@@ -401,6 +398,16 @@ function WorkspaceLayout() {
             />
 
             <SettingsDialog />
+            <PricingModal />
+            <PublicBetaModal />
+            <TemplatesModal
+                onSelectTemplate={(tpl) => {
+                    engine.setInput(tpl.prompt)
+                    engine.setFiles([])
+                }}
+            />
+            <QuickDocsModal />
+            <LegalModal />
             <CompareDialog />
             <SaveDialog
                 open={saveDialogOpen}

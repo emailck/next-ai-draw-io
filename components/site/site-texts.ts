@@ -1,18 +1,17 @@
+import {
+    BRAND_DESCRIPTION,
+    COMPANY_COPYRIGHT,
+    SUPPORT_EMAIL,
+} from "@/lib/brand"
 import type { Locale } from "@/lib/i18n/config"
 
-export const GITHUB_URL = "https://github.com/DayuanJiang/next-ai-draw-io"
-export const RELEASES_URL = `${GITHUB_URL}/releases/latest`
-export const NPM_URL =
-    "https://www.npmjs.com/package/@next-ai-drawio/mcp-server"
-export const SPONSOR_URL = "https://github.com/sponsors/DayuanJiang"
+export const NPM_URL = "https://aicoco.xyz/en/mcp"
 export const MCP_INSTALL =
-    "claude mcp add --scope user drawio -- npx @next-ai-drawio/mcp-server@latest"
+    "claude mcp add --scope user drawio -- npx @aicoco/mcp-server@latest"
 
-// One-click installs: these pages open VS Code or Cursor, which then adds the
-// server. The MCP server README links to the same addresses.
 const MCP_SERVER = {
     command: "npx",
-    args: ["@next-ai-drawio/mcp-server@latest"],
+    args: ["@aicoco/mcp-server@latest"],
 }
 export const MCP_VSCODE_INSTALL_URL = `https://insiders.vscode.dev/redirect?url=${encodeURIComponent(
     `vscode:mcp/install?${encodeURIComponent(JSON.stringify({ name: "drawio", ...MCP_SERVER }))}`,
@@ -31,9 +30,13 @@ export const LANGUAGE_NAMES: Record<Locale, string> = {
 
 export type SiteTexts = {
     nav: {
+        templates: string
         docs: string
+        pricing: string
         mcp: string
         gallery: string
+        signIn: string
+        upgradePro: string
         openEditor: string
         language: string
         /** The button that opens the links on a phone */
@@ -46,140 +49,156 @@ export type SiteTexts = {
         tagline: string
         product: string
         editor: string
-        desktop: string
+        templates: string
+        pricing: string
         mcp: string
         docs: string
-        project: string
-        github: string
-        npm: string
-        issues: string
+        legal: string
+        terms: string
+        privacy: string
+        aup: string
         support: string
-        sponsor: string
-        sponsorText: string
+        supportText: string
         contact: string
-        license: string
+        copyright: string
     }
 }
 
 export const SITE_TEXTS: Record<Locale, SiteTexts> = {
     en: {
         nav: {
-            docs: "Docs",
-            mcp: "MCP server",
-            gallery: "Gallery",
-            openEditor: "Open the editor",
+            templates: "Templates",
+            docs: "Documentation",
+            pricing: "Pricing",
+            mcp: "MCP Server",
+            gallery: "Templates",
+            signIn: "Sign In",
+            upgradePro: "Upgrade to Pro",
+            openEditor: "Launch Studio",
             language: "Language",
             menu: "Menu",
             pages: "All pages",
         },
         copy: { copy: "Copy the command", copied: "Copied" },
         footer: {
-            tagline: "Draw and edit draw.io diagrams by chatting with an AI.",
-            product: "Product",
-            editor: "Editor",
-            desktop: "Desktop app",
-            mcp: "MCP server",
-            docs: "Docs",
-            project: "Project",
-            github: "GitHub",
-            npm: "npm package",
-            issues: "Report an issue",
-            support: "Support",
-            sponsor: "Sponsor",
-            sponsorText:
-                "If this project helps you, sponsoring it keeps the live demo running.",
-            contact: "Contact: me[at]jiang.jp",
-            license: "Open source under the Apache-2.0 license.",
+            tagline: BRAND_DESCRIPTION,
+            product: "Platform",
+            editor: "AICoco Studio Workspace",
+            templates: "Cloud Architecture Templates",
+            pricing: "Subscription Pricing",
+            mcp: "Agent MCP Integration",
+            docs: "Documentation",
+            legal: "Legal & Compliance",
+            terms: "Terms of Service",
+            privacy: "Privacy Policy",
+            aup: "Acceptable Use Policy",
+            support: "Enterprise & Support",
+            supportText:
+                "Need custom seat volume, SSO/SAML, or dedicated cloud topology consulting?",
+            contact: `Support: ${SUPPORT_EMAIL}`,
+            copyright: COMPANY_COPYRIGHT,
         },
     },
     zh: {
         nav: {
-            docs: "文档",
-            mcp: "MCP 服务器",
-            gallery: "图库",
-            openEditor: "打开编辑器",
+            templates: "Templates",
+            docs: "Documentation",
+            pricing: "Pricing",
+            mcp: "MCP Server",
+            gallery: "架构模板",
+            signIn: "Sign In",
+            upgradePro: "Upgrade to Pro",
+            openEditor: "进入工作台",
             language: "语言",
             menu: "菜单",
             pages: "全部页面",
         },
         copy: { copy: "复制命令", copied: "已复制" },
         footer: {
-            tagline: "和 AI 对话，绘制和修改 draw.io 图表。",
-            product: "产品",
-            editor: "编辑器",
-            desktop: "桌面应用",
-            mcp: "MCP 服务器",
-            docs: "文档",
-            project: "项目",
-            github: "GitHub",
-            npm: "npm 包",
-            issues: "反馈问题",
-            support: "支持",
-            sponsor: "赞助",
-            sponsorText:
-                "如果这个项目对您有帮助，您的赞助可以让在线演示站继续运行。",
-            contact: "联系：me[at]jiang.jp",
-            license: "基于 Apache-2.0 许可证开源。",
+            tagline: BRAND_DESCRIPTION,
+            product: "产品平台",
+            editor: "AICoco Studio 工作台",
+            templates: "云架构与拓扑模板",
+            pricing: "商业订阅方案",
+            mcp: "MCP 智能体集成",
+            docs: "产品文档",
+            legal: "法律与合规",
+            terms: "Terms of Service",
+            privacy: "Privacy Policy",
+            aup: "Acceptable Use Policy",
+            support: "企业服务与支持",
+            supportText:
+                "如需企业多席位采购、专属 SLA 支持或云架构咨询服务，请联系我们的商用支持团队。",
+            contact: `Support: ${SUPPORT_EMAIL}`,
+            copyright: COMPANY_COPYRIGHT,
         },
     },
     ja: {
         nav: {
-            docs: "ドキュメント",
-            mcp: "MCP サーバー",
-            gallery: "ギャラリー",
-            openEditor: "エディタを開く",
+            templates: "Templates",
+            docs: "Documentation",
+            pricing: "Pricing",
+            mcp: "MCP Server",
+            gallery: "テンプレート",
+            signIn: "Sign In",
+            upgradePro: "Upgrade to Pro",
+            openEditor: "スタジオを開く",
             language: "言語",
             menu: "メニュー",
             pages: "すべてのページ",
         },
         copy: { copy: "コマンドをコピー", copied: "コピーしました" },
         footer: {
-            tagline: "AI と話しながら draw.io の図を描いて編集できます。",
-            product: "製品",
-            editor: "エディタ",
-            desktop: "デスクトップアプリ",
-            mcp: "MCP サーバー",
+            tagline: BRAND_DESCRIPTION,
+            product: "プラットフォーム",
+            editor: "AICoco Studio ワークスペース",
+            templates: "クラウド構成テンプレート",
+            pricing: "料金プラン",
+            mcp: "MCP サーバー統合",
             docs: "ドキュメント",
-            project: "プロジェクト",
-            github: "GitHub",
-            npm: "npm パッケージ",
-            issues: "問題を報告",
-            support: "サポート",
-            sponsor: "スポンサー",
-            sponsorText:
-                "このプロジェクトが役に立ったら、スポンサーになってライブデモの運営を支えてください。",
-            contact: "連絡先：me[at]jiang.jp",
-            license: "Apache-2.0 ライセンスのオープンソースです。",
+            legal: "法務・コンプライアンス",
+            terms: "Terms of Service",
+            privacy: "Privacy Policy",
+            aup: "Acceptable Use Policy",
+            support: "エンタープライズサポート",
+            supportText:
+                "法人契約・専用SLA・請求書払いに関するお問い合わせはサポート窓口までご連絡ください。",
+            contact: `Support: ${SUPPORT_EMAIL}`,
+            copyright: COMPANY_COPYRIGHT,
         },
     },
     "zh-Hant": {
         nav: {
-            docs: "文件",
-            mcp: "MCP 伺服器",
-            gallery: "圖庫",
-            openEditor: "開啟編輯器",
+            templates: "Templates",
+            docs: "Documentation",
+            pricing: "Pricing",
+            mcp: "MCP Server",
+            gallery: "架構模板",
+            signIn: "Sign In",
+            upgradePro: "Upgrade to Pro",
+            openEditor: "進入工作台",
             language: "語言",
             menu: "選單",
             pages: "所有頁面",
         },
         copy: { copy: "複製指令", copied: "已複製" },
         footer: {
-            tagline: "和 AI 對話，繪製和修改 draw.io 圖表。",
-            product: "產品",
-            editor: "編輯器",
-            desktop: "桌面應用程式",
-            mcp: "MCP 伺服器",
-            docs: "文件",
-            project: "專案",
-            github: "GitHub",
-            npm: "npm 套件",
-            issues: "回報問題",
-            support: "支援",
-            sponsor: "贊助",
-            sponsorText:
-                "如果這個專案對您有幫助，您的贊助可以讓線上展示網站繼續運作。",
-            contact: "聯絡：me[at]jiang.jp",
-            license: "以 Apache-2.0 授權開源。",
+            tagline: BRAND_DESCRIPTION,
+            product: "產品平台",
+            editor: "AICoco Studio 工作台",
+            templates: "雲架構與拓撲模板",
+            pricing: "商業訂閱方案",
+            mcp: "MCP 智慧體整合",
+            docs: "產品文件",
+            legal: "法律與合規",
+            terms: "Terms of Service",
+            privacy: "Privacy Policy",
+            aup: "Acceptable Use Policy",
+            support: "企業服務與支援",
+            supportText:
+                "如需企業多席位採購、專屬 SLA 支援或雲架構顧問服務，請聯絡商用支援團隊。",
+            contact: `Support: ${SUPPORT_EMAIL}`,
+            copyright: COMPANY_COPYRIGHT,
         },
     },
 }

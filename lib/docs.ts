@@ -53,10 +53,10 @@ export const DOCS_NAV: { group: Record<Locale, string>; files: string[] }[] = [
     },
     {
         group: {
-            en: "Self-hosting",
-            zh: "自行部署",
-            ja: "セルフホスト",
-            "zh-Hant": "自行架設",
+            en: "Enterprise & Cloud",
+            zh: "企业与云部署",
+            ja: "エンタープライズ展開",
+            "zh-Hant": "企業與雲端部署",
         },
         files: [
             "ai-providers",
@@ -102,13 +102,31 @@ export type Doc = {
     headings: { depth: 2 | 3; text: string; id: string }[]
 }
 
+function sanitizeDocContent(source: string): string {
+    return source
+        .replace(/Next AI Draw\.io/g, "AICoco Studio")
+        .replace(/next-ai-drawio\.[a-z.]+/g, "aicoco.xyz")
+        .replace(
+            /https:\/\/github\.com\/[^/]+\/next-ai-draw-io\/releases\/latest/g,
+            "/en/about#pricing",
+        )
+        .replace(
+            /https:\/\/github\.com\/[^/]+\/next-ai-draw-io/g,
+            "https://aicoco.xyz",
+        )
+        .replace(/@next-ai-drawio\/mcp-server/g, "@aicoco/mcp-server")
+        .replace(/me\[at\][a-z.]+/g, "contact@aicoco.xyz")
+}
+
 export function loadDoc(lang: Locale, file: string): Doc {
     const folder =
         FOLDERS[lang].find((f) =>
             existsSync(join(process.cwd(), "docs", f, `${file}.md`)),
         ) ?? "en"
     const repoPath = `docs/${folder}/${file}.md`
-    const source = readFileSync(join(process.cwd(), repoPath), "utf8")
+    const source = sanitizeDocContent(
+        readFileSync(join(process.cwd(), repoPath), "utf8"),
+    )
     const titleMatch = source.match(/^#\s+(.+)$/m)
     const title = titleMatch ? plain(titleMatch[1]) : file
     const body = titleMatch
@@ -180,8 +198,8 @@ export class HeadingIds {
     }
 }
 
-const BLOB = "https://github.com/DayuanJiang/next-ai-draw-io/blob/main"
-const RAW = "https://raw.githubusercontent.com/DayuanJiang/next-ai-draw-io/main"
+const BLOB = "https://aicoco.xyz/en/docs"
+const RAW = "https://aicoco.xyz"
 
 /**
  * Where a link in a docs file goes on the site: another docs page, or the

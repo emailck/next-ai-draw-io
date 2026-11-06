@@ -1,8 +1,10 @@
-import { FileUp, History, Pencil } from "lucide-react"
+import { FileUp, History, Pencil, Sparkles } from "lucide-react"
 import type React from "react"
 import { useDictionary } from "@/hooks/use-dictionary"
 import { getAssetUrl } from "@/lib/base-path"
+import { BRAND_QUOTA_NOTICE } from "@/lib/brand"
 import { cn } from "@/lib/utils"
+import { useUiStore } from "@/stores/ui-store"
 import { useChatEngine } from "./chat-engine"
 import { Composer } from "./composer"
 import { McpNotice } from "./mcp-notice"
@@ -189,6 +191,21 @@ export function LobbyHero({
                 autoFocus={!compact}
                 placeholder={t.placeholder}
             />
+
+            {/* Commercial SaaS quota status bar */}
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-blue-500/20 bg-blue-500/[0.04] px-3.5 py-2 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1.5 font-medium text-foreground/90">
+                    <Sparkles className="size-3.5 text-blue-600 dark:text-blue-400" />
+                    {BRAND_QUOTA_NOTICE}
+                </span>
+                <button
+                    type="button"
+                    onClick={() => useUiStore.getState().setPricingOpen(true)}
+                    className="font-semibold text-blue-600 hover:underline dark:text-blue-400"
+                >
+                    View Plans →
+                </button>
+            </div>
 
             {/* Examples: one row of tiles; the ways to bring your own
                 diagram follow as a separate group */}

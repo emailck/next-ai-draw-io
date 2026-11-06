@@ -7,6 +7,12 @@ import { LocaleProvider } from "@/components/canvas/locale-context"
 import { AppToaster } from "@/components/workspace/app-toaster"
 import { DiagramProvider } from "@/contexts/diagram-context"
 import { DictionaryProvider } from "@/hooks/use-dictionary"
+import {
+    BRAND_DESCRIPTION,
+    BRAND_NAME,
+    BRAND_TITLE,
+    SUPPORT_EMAIL,
+} from "@/lib/brand"
 import type { Locale } from "@/lib/i18n/config"
 import { i18n } from "@/lib/i18n/config"
 import { getDictionary, hasLocale } from "@/lib/i18n/dictionaries"
@@ -52,49 +58,48 @@ export async function generateMetadata({
     const lang: Locale = hasLocale(rawLang) ? rawLang : i18n.defaultLocale
 
     const titles: Record<Locale, string> = {
-        en: "Next AI Draw.io - AI-Powered Diagram Generator",
-        zh: "Next AI Draw.io - AI 驱动的图表生成器",
-        ja: "Next AI Draw.io - AI 搭載ダイアグラム生成ツール",
-        "zh-Hant": "Next AI Draw.io - AI 驅動的圖表產生器",
+        en: BRAND_TITLE,
+        zh: BRAND_TITLE,
+        ja: BRAND_TITLE,
+        "zh-Hant": BRAND_TITLE,
     }
 
     const descriptions: Record<Locale, string> = {
-        en: "Create AWS architecture diagrams, flowcharts, and technical diagrams using AI. Free online tool integrating draw.io with AI assistance for professional diagram creation.",
-        zh: "使用 AI 创建 AWS 架构图、流程图和技术图表。免费在线工具，整合 draw.io 与 AI 辅助，轻松创建专业图表。",
-        ja: "AI で AWS アーキテクチャ図、フローチャート、技術図を作成。draw.io と AI アシスタントを統合した無料オンラインツールで、プロ品質の図を簡単に作成できます。",
-        "zh-Hant":
-            "使用 AI 建立 AWS 架構圖、流程圖和技術圖表。免費線上工具整合 draw.io 與 AI 輔助，輕鬆建立專業圖表。",
+        en: BRAND_DESCRIPTION,
+        zh: BRAND_DESCRIPTION,
+        ja: BRAND_DESCRIPTION,
+        "zh-Hant": BRAND_DESCRIPTION,
     }
 
     return {
         title: titles[lang],
         description: descriptions[lang],
         keywords: [
-            "AI diagram generator",
-            "AWS architecture",
-            "flowchart creator",
-            "draw.io",
-            "AI drawing tool",
-            "technical diagrams",
-            "diagram automation",
-            "free diagram generator",
-            "online diagram maker",
+            "AICoco Studio",
+            "AICoco Architecture",
+            "AI cloud architecture generator",
+            "AWS architecture diagram",
+            "GCP cloud topology",
+            "UML diagram generator",
+            "system architecture design",
+            "B2B SaaS diagramming tool",
+            "draw.io AI studio",
         ],
-        authors: [{ name: "Next AI Draw.io" }],
-        creator: "Next AI Draw.io",
-        publisher: "Next AI Draw.io",
+        authors: [{ name: BRAND_NAME }],
+        creator: BRAND_NAME,
+        publisher: BRAND_NAME,
         metadataBase: new URL(SITE_URL),
         openGraph: {
             title: titles[lang],
             description: descriptions[lang],
             type: "website",
             url: `/${lang}`,
-            siteName: "Next AI Draw.io",
+            siteName: BRAND_NAME,
             locale: OG_LOCALE[lang],
             images: [
                 {
                     ...OG_IMAGE,
-                    alt: "Next AI Draw.io - AI-powered diagram creation tool",
+                    alt: BRAND_TITLE,
                 },
             ],
         },
@@ -116,7 +121,12 @@ export async function generateMetadata({
             },
         },
         icons: {
-            icon: "/favicon.ico",
+            icon: [
+                { url: "/logo.svg", type: "image/svg+xml" },
+                { url: "/favicon.ico" },
+            ],
+            shortcut: "/logo.svg",
+            apple: "/logo.svg",
         },
         // The home page's; other pages set their own
         alternates: localeAlternates(lang, ""),
@@ -138,22 +148,34 @@ export default async function RootLayout({
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        name: "Next AI Draw.io",
-        applicationCategory: "DesignApplication",
+        name: BRAND_NAME,
+        alternateName: "AICoco Architecture",
+        applicationCategory: "BusinessApplication",
         operatingSystem: "Web, Windows, macOS, Linux",
-        description:
-            "Draw and edit draw.io diagrams by chatting with an AI: AWS, Azure and GCP architecture diagrams, flowcharts and other technical diagrams on a real draw.io canvas. Every AI change is a version you can compare or restore, and it works with many AI providers. Also available as a desktop app and an MCP server for AI agents.",
+        description: BRAND_DESCRIPTION,
         url: SITE_URL,
-        sameAs: [
-            "https://github.com/DayuanJiang/next-ai-draw-io",
-            "https://www.npmjs.com/package/@next-ai-drawio/mcp-server",
-        ],
+        email: SUPPORT_EMAIL,
         inLanguage: validLang,
-        offers: {
-            "@type": "Offer",
-            price: "0",
-            priceCurrency: "USD",
-        },
+        offers: [
+            {
+                "@type": "Offer",
+                name: "Starter Plan",
+                price: "0",
+                priceCurrency: "USD",
+            },
+            {
+                "@type": "Offer",
+                name: "Pro Plan",
+                price: "15",
+                priceCurrency: "USD",
+            },
+            {
+                "@type": "Offer",
+                name: "Team Plan",
+                price: "35",
+                priceCurrency: "USD",
+            },
+        ],
     }
 
     return (
