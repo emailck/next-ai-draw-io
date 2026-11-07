@@ -85,6 +85,30 @@ export function proxy(request: NextRequest) {
         // temporary: it is the entry point that picks the visitor's language.
         return NextResponse.redirect(url, pathname === "/" ? 307 : 308)
     }
+
+    const host = (
+        request.headers.get("x-forwarded-host") ||
+        request.headers.get("host") ||
+        request.nextUrl.host ||
+        ""
+    ).toLowerCase()
+    const isAppSubdomain = host.startsWith("app.")
+
+    // Allow /{locale}/studio to always render the Studio workspace (useful on localhost or main domain fallback)
+    for (const locale of i18n.locales) {
+        if (pathname === `/${locale}/studio`) {
+            const url = request.nextUrl.clone()
+            url.pathname = `/${locale}`
+            return NextResponse.rewrite(url)
+        }
+        // On the main domain (gravitexai.com), /{locale} renders the marketing landing page (/about),
+        // while on app.gravitexai.com, /{locale} renders the Studio workspace.
+        if (!isAppSubdomain && pathname === `/${locale}`) {
+            const url = request.nextUrl.clone()
+            url.pathname = `/${locale}/about`
+            return NextResponse.rewrite(url)
+        }
+    }
 }
 
 export const config = {

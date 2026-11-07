@@ -31,7 +31,7 @@ function useVideoClosed() {
 
 const ANIMATION_STEPS = [
     {
-        cmd: '$ aicoco generate --cloud aws --topology "Multi-AZ HA"',
+        cmd: '$ gravitex generate --cloud aws --topology "Multi-AZ HA"',
         status: "Parsing cloud architecture prompt...",
     },
     {
@@ -44,7 +44,7 @@ const ANIMATION_STEPS = [
     },
     {
         cmd: "✓ Auto-layout complete · Vector XML & SVG synced",
-        status: "Live on AICoco Studio Canvas",
+        status: "Live on GRAVITEX AI Studio Canvas",
     },
 ]
 
@@ -125,10 +125,10 @@ function AnimatedArchitectureMotion({ className }: { className?: string }) {
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                 >
-                    <title>AICoco Studio Animated Cloud Topology</title>
+                    <title>GRAVITEX AI Studio Animated Cloud Topology</title>
                     {/* Grid dots */}
                     <pattern
-                        id="aicoco-mini-grid"
+                        id="gravitex-mini-grid"
                         width="18"
                         height="18"
                         patternUnits="userSpaceOnUse"
@@ -143,7 +143,7 @@ function AnimatedArchitectureMotion({ className }: { className?: string }) {
                     <rect
                         width="360"
                         height="120"
-                        fill="url(#aicoco-mini-grid)"
+                        fill="url(#gravitex-mini-grid)"
                     />
 
                     {/* VPC Boundary Box */}

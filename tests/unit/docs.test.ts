@@ -22,7 +22,7 @@ describe("resolveDocLink", () => {
         ).toBe("/zh-Hant/docs/editor")
     })
 
-    it("sends other repository files to GitHub", () => {
+    it("sends other repository files to the commercial docs host", () => {
         expect(
             resolveDocLink(
                 "../../packages/mcp-server/README.md#configuration",
@@ -30,7 +30,7 @@ describe("resolveDocLink", () => {
                 "en",
             ),
         ).toBe(
-            "https://github.com/DayuanJiang/next-ai-draw-io/blob/main/packages/mcp-server/README.md#configuration",
+            "https://gravitexai.com/en/docs/packages/mcp-server/README.md#configuration",
         )
     })
 

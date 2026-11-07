@@ -16,8 +16,8 @@ const SCENES = [
     {
         step: "01",
         title: "Connect IDE Agent",
-        prompt: "claude mcp add drawio -- npx @aicoco/mcp-server@latest",
-        toolCall: "start_session({ workspace: 'AICoco Studio' })",
+        prompt: "claude mcp add drawio -- npx @gravitexai/mcp-server@latest",
+        toolCall: "start_session({ workspace: 'GRAVITEX AI Studio' })",
         log: "Connected live browser canvas on port 6002",
     },
     {
@@ -46,7 +46,7 @@ const SCENES = [
 
 /**
  * Full-size pure-code animated showcase replacing the legacy mp4 video on /[lang]/mcp.
- * Simulates an IDE agent streaming MCP tool calls into a live AICoco Studio vector canvas.
+ * Simulates an IDE agent streaming MCP tool calls into a live GRAVITEX AI Studio vector canvas.
  */
 export function PromoVideo({ label }: { label: string }) {
     const [scene, setScene] = useState(0)
@@ -88,7 +88,7 @@ export function PromoVideo({ label }: { label: string }) {
                 <div className="flex items-center gap-2">
                     <span className="hidden items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[11px] font-medium text-emerald-300 sm:inline-flex">
                         <span className="size-1.5 animate-ping rounded-full bg-emerald-400" />
-                        @aicoco/mcp-server
+                        @gravitexai/mcp-server
                     </span>
                     <button
                         type="button"
@@ -179,9 +179,9 @@ export function PromoVideo({ label }: { label: string }) {
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
                     >
-                        <title>AICoco Studio Live MCP Vector Canvas</title>
+                        <title>GRAVITEX AI Studio Live MCP Vector Canvas</title>
                         <pattern
-                            id="aicoco-mcp-grid"
+                            id="gravitex-mcp-grid"
                             width="20"
                             height="20"
                             patternUnits="userSpaceOnUse"
@@ -196,7 +196,7 @@ export function PromoVideo({ label }: { label: string }) {
                         <rect
                             width="420"
                             height="185"
-                            fill="url(#aicoco-mcp-grid)"
+                            fill="url(#gravitex-mcp-grid)"
                         />
 
                         {/* AWS VPC Outer Frame */}

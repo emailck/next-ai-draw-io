@@ -1,12 +1,12 @@
 {
-    "name": "@next-ai-drawio/mcp-server",
+    "name": "@gravitexai/mcp-server",
     "version": "0.4.11",
-    "description": "draw.io MCP server for Claude Code, Cursor, Codex and VS Code: the AI draws on a live browser canvas you can also edit by hand, with versions and undo",
-    "mcpName": "io.github.DayuanJiang/next-ai-drawio",
+    "description": "GRAVITEX AI Studio draw.io MCP server for Claude Code, Cursor, Codex and VS Code: the AI draws on a live browser canvas you can also edit by hand, with versions and undo",
+    "mcpName": "com.gravitexai/mcp-server",
     "type": "module",
     "main": "dist/index.js",
     "bin": {
-        "next-ai-drawio-mcp": "./dist/index.js"
+        "gravitex-mcp": "./dist/index.js"
     },
     "scripts": {
         "build": "tsc && tsc -p shell && node scripts/copy-assets.mjs && node scripts/fetch-drawio.mjs && node scripts/build-shell.mjs",
@@ -35,16 +35,16 @@
         "codex",
         "model-context-protocol"
     ],
-    "author": "DayuanJiang",
-    "license": "Apache-2.0",
+    "author": "GRAVITEX AI GLOBAL LLC",
+    "license": "UNLICENSED",
     "repository": {
         "type": "git",
-        "url": "https://github.com/DayuanJiang/next-ai-draw-io",
+        "url": "https://gravitexai.com",
         "directory": "packages/mcp-server"
     },
-    "homepage": "https://github.com/DayuanJiang/next-ai-draw-io/tree/main/packages/mcp-server#readme",
+    "homepage": "https://gravitexai.com/en/mcp",
     "bugs": {
-        "url": "https://github.com/DayuanJiang/next-ai-draw-io/issues"
+        "url": "mailto:support@gravitexai.com"
     },
     "publishConfig": {
         "access": "public"

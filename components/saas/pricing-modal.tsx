@@ -416,7 +416,7 @@ export function QuickDocsModal() {
         {
             step: "01",
             title: "Natural Language Cloud Topology Generation",
-            text: "Describe your AWS, GCP, Azure, or Kubernetes infrastructure in plain text. AICoco Studio automatically selects official vendor icon libraries and connects components with orthogonal routing.",
+            text: `Describe your AWS, GCP, Azure, or Kubernetes infrastructure in plain text. ${BRAND_NAME} automatically selects official vendor icon libraries and connects components with orthogonal routing.`,
         },
         {
             step: "02",

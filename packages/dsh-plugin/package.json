@@ -1,7 +1,7 @@
 {
-    "name": "@next-ai-drawio/dsh",
+    "name": "@gravitexai/dsh",
     "version": "0.1.0",
-    "description": "draw.io diagrams in DeepSeek Harness: the AI draws on a live canvas in the sidebar that you can also edit by hand, with versions and undo",
+    "description": "GRAVITEX AI Studio draw.io diagrams in DeepSeek Harness: the AI draws on a live canvas in the sidebar that you can also edit by hand, with versions and undo",
     "keywords": [
         "dsh",
         "dsh-plugin",
@@ -13,16 +13,16 @@
         "architecture-diagram",
         "flowchart"
     ],
-    "author": "DayuanJiang",
-    "license": "Apache-2.0",
-    "homepage": "https://next-ai-drawio.jiang.jp/en/mcp",
+    "author": "GRAVITEX AI GLOBAL LLC",
+    "license": "UNLICENSED",
+    "homepage": "https://gravitexai.com/en/mcp",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/DayuanJiang/next-ai-draw-io.git",
+        "url": "https://gravitexai.com",
         "directory": "packages/dsh-plugin"
     },
     "bugs": {
-        "url": "https://github.com/DayuanJiang/next-ai-draw-io/issues"
+        "url": "mailto:support@gravitexai.com"
     },
     "icon": "./icon.png",
     "files": [

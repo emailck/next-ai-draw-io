@@ -27,8 +27,6 @@ export type LandingTexts = {
     modelLabel: string
     moreHeading: string
     more: { title: string; text: string }[]
-    providersHeading: string
-    providersText: string
     ctaHeading: string
 }
 
@@ -37,8 +35,8 @@ export const TEXTS: Record<Locale, LandingTexts> = {
         title: BRAND_TITLE,
         description: BRAND_DESCRIPTION,
         keywords: [
-            "AICoco Studio",
-            "AICoco Architecture",
+            "GRAVITEX AI Studio",
+            "GRAVITEX AI",
             "AI cloud architecture generator",
             "AWS architecture diagram",
             "GCP topology generator",
@@ -54,7 +52,7 @@ export const TEXTS: Record<Locale, LandingTexts> = {
             browser: {
                 title: "Cloud Studio Workspace",
                 text: `Interactive vector canvas in your browser. ${BRAND_QUOTA_NOTICE}`,
-                action: "Open AICoco Studio",
+                action: "Open GRAVITEX AI Studio",
             },
             desktop: {
                 title: "Enterprise Blueprint Library",
@@ -69,7 +67,7 @@ export const TEXTS: Record<Locale, LandingTexts> = {
         },
         examplesHeading: "Cloud & System Architecture Examples",
         examplesIntro:
-            "Enterprise topologies and technical diagrams generated in AICoco Studio.",
+            "Enterprise topologies and technical diagrams generated in GRAVITEX AI Studio.",
         examplesMore: "Browse all architecture templates",
         promptLabel: "Prompt:",
         modelLabel: "Engine:",
@@ -100,17 +98,14 @@ export const TEXTS: Record<Locale, LandingTexts> = {
                 text: "Automatically align multi-AZ subnets, security groups, and service meshes with zero connector overlap.",
             },
         ],
-        providersHeading: "Multi-Model Enterprise AI Routing",
-        providersText:
-            "Powered by frontier reasoning models optimized for cloud infrastructure topology, system architecture, and UML specifications.",
         ctaHeading: "Design your next cloud architecture in minutes",
     },
     zh: {
         title: BRAND_TITLE,
         description: BRAND_DESCRIPTION,
         keywords: [
-            "AICoco Studio",
-            "AICoco Architecture",
+            "GRAVITEX AI Studio",
+            "GRAVITEX AI",
             "AI 云架构图生成器",
             "AWS 架构图",
             "GCP 拓扑图",
@@ -118,7 +113,7 @@ export const TEXTS: Record<Locale, LandingTexts> = {
         ],
         h1: "面向软件工程师与架构师的 AI 云架构设计工作台",
         lede: BRAND_DESCRIPTION,
-        primary: "启动 AICoco Studio",
+        primary: "启动 GRAVITEX AI Studio",
         phonePrimary: "查看产品文档",
         secondary: "查看订阅方案",
         waysHeading: "专为现代软件工程团队打造",
@@ -141,7 +136,7 @@ export const TEXTS: Record<Locale, LandingTexts> = {
         },
         examplesHeading: "云架构与系统拓扑示例",
         examplesIntro:
-            "由 AICoco Studio 生成的生产级云原生架构图与系统设计图。",
+            "由 GRAVITEX AI Studio 生成的生产级云原生架构图与系统设计图。",
         examplesMore: "查看全部架构模板",
         promptLabel: "提示词：",
         modelLabel: "模型引擎：",
@@ -172,17 +167,14 @@ export const TEXTS: Record<Locale, LandingTexts> = {
                 text: "自动对齐多可用区子网、安全组边界与服务网格节点，消除连线交叉重叠。",
             },
         ],
-        providersHeading: "多模型企业级 AI 推理引擎",
-        providersText:
-            "底层集成主流前沿推理大模型，针对云基础设施拓扑、分布式系统架构与 UML 规范深度优化。",
         ctaHeading: "立即用自然语言构建您的下一张云架构图",
     },
     ja: {
         title: BRAND_TITLE,
         description: BRAND_DESCRIPTION,
         keywords: [
-            "AICoco Studio",
-            "AICoco Architecture",
+            "GRAVITEX AI Studio",
+            "GRAVITEX AI",
             "AI クラウド構成図",
             "AWS アーキテクチャ図",
             "UML ダイアグラム",
@@ -197,7 +189,7 @@ export const TEXTS: Record<Locale, LandingTexts> = {
             browser: {
                 title: "クラウドワークスペース",
                 text: `ブラウザ上で即座にベクター編集。${BRAND_QUOTA_NOTICE}`,
-                action: "AICoco Studio を開く",
+                action: "GRAVITEX AI Studio を開く",
             },
             desktop: {
                 title: "クラウド構成テンプレート",
@@ -212,7 +204,7 @@ export const TEXTS: Record<Locale, LandingTexts> = {
         },
         examplesHeading: "クラウドアーキテクチャ生成例",
         examplesIntro:
-            "AICoco Studio でプロンプトから生成されたアーキテクチャ図とシステム設計図。",
+            "GRAVITEX AI Studio でプロンプトから生成されたアーキテクチャ図とシステム設計図。",
         examplesMore: "すべてのテンプレートを見る",
         promptLabel: "プロンプト：",
         modelLabel: "モデル：",
@@ -243,24 +235,21 @@ export const TEXTS: Record<Locale, LandingTexts> = {
                 text: "マルチAZ構成やサブネット境界を自動整列し、コネクタの重なりを解消します。",
             },
         ],
-        providersHeading: "マルチモデル AI エンジン対応",
-        providersText:
-            "クラウドインフラ設計や UML モデリングに最適化された最新推論モデルをサポートしています。",
         ctaHeading: "次のクラウドアーキテクチャを数分で設計しましょう",
     },
     "zh-Hant": {
         title: BRAND_TITLE,
         description: BRAND_DESCRIPTION,
         keywords: [
-            "AICoco Studio",
-            "AICoco Architecture",
+            "GRAVITEX AI Studio",
+            "GRAVITEX AI",
             "AI 雲端架構圖產生器",
             "AWS 架構圖",
             "UML 圖表產生",
         ],
         h1: "面向軟體工程師與架構師的 AI 雲端架構設計工作台",
         lede: BRAND_DESCRIPTION,
-        primary: "啟動 AICoco Studio",
+        primary: "啟動 GRAVITEX AI Studio",
         phonePrimary: "查看產品文件",
         secondary: "查看訂閱方案",
         waysHeading: "專為現代軟體工程團隊打造",
@@ -283,7 +272,7 @@ export const TEXTS: Record<Locale, LandingTexts> = {
         },
         examplesHeading: "雲端架構與系統拓撲範例",
         examplesIntro:
-            "由 AICoco Studio 產生的生產級雲原生架構圖與系統設計圖。",
+            "由 GRAVITEX AI Studio 產生的生產級雲原生架構圖與系統設計圖。",
         examplesMore: "查看全部架構模板",
         promptLabel: "提示詞：",
         modelLabel: "模型引擎：",
@@ -314,9 +303,6 @@ export const TEXTS: Record<Locale, LandingTexts> = {
                 text: "自動對齊多可用區子網路、安全群組邊界與服務網格節點，消除連線交叉重疊。",
             },
         ],
-        providersHeading: "多模型企業級 AI 推理引擎",
-        providersText:
-            "底層整合主流前沿推理大模型，針對雲端基礎設施拓撲、分散式系統架構與 UML 規範深度最佳化。",
         ctaHeading: "立即用自然語言建構您的下一張雲端架構圖",
     },
 }

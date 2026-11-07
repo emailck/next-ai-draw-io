@@ -104,18 +104,23 @@ export type Doc = {
 
 function sanitizeDocContent(source: string): string {
     return source
-        .replace(/Next AI Draw\.io/g, "AICoco Studio")
-        .replace(/next-ai-drawio\.[a-z.]+/g, "aicoco.xyz")
+        .replace(/Next AI Draw\.io/g, "GRAVITEX AI Studio")
+        .replace(/AICoco Studio/g, "GRAVITEX AI Studio")
+        .replace(/AICoco Architecture/g, "GRAVITEX AI")
+        .replace(/next-ai-drawio\.[a-z.]+/g, "gravitexai.com")
+        .replace(/aicoco\.xyz/g, "gravitexai.com")
         .replace(
             /https:\/\/github\.com\/[^/]+\/next-ai-draw-io\/releases\/latest/g,
             "/en/about#pricing",
         )
         .replace(
             /https:\/\/github\.com\/[^/]+\/next-ai-draw-io/g,
-            "https://aicoco.xyz",
+            "https://gravitexai.com",
         )
-        .replace(/@next-ai-drawio\/mcp-server/g, "@aicoco/mcp-server")
-        .replace(/me\[at\][a-z.]+/g, "contact@aicoco.xyz")
+        .replace(/@next-ai-drawio\/mcp-server/g, "@gravitexai/mcp-server")
+        .replace(/@aicoco\/mcp-server/g, "@gravitexai/mcp-server")
+        .replace(/contact@aicoco\.xyz/g, "support@gravitexai.com")
+        .replace(/me\[at\][a-z.]+/g, "support@gravitexai.com")
 }
 
 export function loadDoc(lang: Locale, file: string): Doc {
@@ -198,8 +203,8 @@ export class HeadingIds {
     }
 }
 
-const BLOB = "https://aicoco.xyz/en/docs"
-const RAW = "https://aicoco.xyz"
+const BLOB = "https://gravitexai.com/en/docs"
+const RAW = "https://gravitexai.com"
 
 /**
  * Where a link in a docs file goes on the site: another docs page, or the

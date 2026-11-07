@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 
 /**
- * AICoco Studio independent modern cloud-topology vector brand icon
+ * GRAVITEX AI Studio independent modern cloud-topology vector brand icon
  */
 export function BrandMark({ className }: { className?: string }) {
     return (
@@ -21,10 +21,10 @@ export function BrandMark({ className }: { className?: string }) {
                 className="size-full"
                 aria-hidden="true"
             >
-                <title>AICoco Studio</title>
+                <title>GRAVITEX AI Studio</title>
                 <defs>
                     <linearGradient
-                        id="aicoco-brand-bg"
+                        id="gravitex-brand-bg"
                         x1="0"
                         y1="0"
                         x2="64"
@@ -40,7 +40,7 @@ export function BrandMark({ className }: { className?: string }) {
                     width="64"
                     height="64"
                     rx="14"
-                    fill="url(#aicoco-brand-bg)"
+                    fill="url(#gravitex-brand-bg)"
                 />
                 <rect
                     x="2"

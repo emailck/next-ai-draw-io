@@ -3,7 +3,6 @@ import { Globe, Layers, SquareTerminal } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "@/components/image-with-basepath"
-import { ProviderLogo } from "@/components/provider-logo"
 import { AboutPricingSection } from "@/components/saas/about-pricing-section"
 import { CopyCommand } from "@/components/site/copy-command"
 import { DemoPlayer } from "@/components/site/demo-player"
@@ -15,10 +14,9 @@ import {
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteHeader } from "@/components/site/site-header"
 import { MCP_INSTALL, SITE_TEXTS } from "@/components/site/site-texts"
-import { BRAND_NAME } from "@/lib/brand"
+import { APP_URL, BRAND_NAME } from "@/lib/brand"
 import type { Locale } from "@/lib/i18n/config"
 import { hasLocale } from "@/lib/i18n/dictionaries"
-import { PROVIDER_NAMES, PROVIDERS } from "@/lib/providers"
 import { localeAlternates, OG_IMAGE, OG_LOCALE } from "@/lib/seo"
 import { TEXTS } from "./texts"
 
@@ -45,12 +43,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: t.title,
         description: t.description,
         keywords: t.keywords,
-        alternates: localeAlternates(locale, "/about"),
+        alternates: localeAlternates(locale, ""),
         openGraph: {
             title: t.title,
             description: t.description,
             type: "website",
-            url: `/${locale}/about`,
+            url: `/${locale}`,
             siteName: BRAND_NAME,
             locale: OG_LOCALE[locale],
             images: [{ ...OG_IMAGE, alt: t.title }],
@@ -69,11 +67,12 @@ export default async function About({ params }: Props) {
     const t = TEXTS[lang]
     const site = SITE_TEXTS[lang]
     const demo = await demoTexts(lang)
+    const studioUrl = `${APP_URL}/${lang}`
     const ways = [
         {
             icon: Globe,
             ...t.ways.browser,
-            href: `/${lang}`,
+            href: studioUrl,
         },
         {
             icon: Layers,
@@ -115,12 +114,12 @@ export default async function About({ params }: Props) {
                                 {t.lede}
                             </p>
                             <div className="mt-5 flex flex-wrap items-center gap-3">
-                                <Link
-                                    href={`/${lang}`}
+                                <a
+                                    href={studioUrl}
                                     className="rounded-lg bg-foreground px-4.5 py-2.5 text-[14.5px] font-medium text-background max-md:hidden"
                                 >
                                     {t.primary}
-                                </Link>
+                                </a>
                                 <Link
                                     href={`/${lang}/docs`}
                                     className="rounded-lg bg-foreground px-4.5 py-2.5 text-[14.5px] font-medium text-background md:hidden"
@@ -215,7 +214,7 @@ export default async function About({ params }: Props) {
                 </section>
 
                 {/* Other features */}
-                <section className="border-y border-border bg-card">
+                <section className="border-t border-border bg-card">
                     <div className="mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-16">
                         <h2 className="text-[22px] font-semibold tracking-[-0.02em]">
                             {t.moreHeading}
@@ -235,31 +234,6 @@ export default async function About({ params }: Props) {
                     </div>
                 </section>
 
-                {/* AI providers */}
-                <section className="mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-16">
-                    <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] md:gap-12">
-                        <div>
-                            <h2 className="text-[22px] font-semibold tracking-[-0.02em] [text-wrap:balance]">
-                                {t.providersHeading}
-                            </h2>
-                            <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-                                {t.providersText}
-                            </p>
-                        </div>
-                        <ul className="flex flex-wrap content-start gap-2">
-                            {PROVIDER_NAMES.map((name) => (
-                                <li
-                                    key={name}
-                                    className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-[13.5px]"
-                                >
-                                    <ProviderLogo provider={name} />
-                                    {PROVIDERS[name].label}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </section>
-
                 {/* Closing call to action */}
                 <section className="lp-grid border-t border-border">
                     <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-5 px-5 py-12 md:flex-row md:items-center md:gap-8 md:px-8 md:py-14">
@@ -267,12 +241,12 @@ export default async function About({ params }: Props) {
                             {t.ctaHeading}
                         </h2>
                         <div className="flex items-center gap-3">
-                            <Link
-                                href={`/${lang}`}
+                            <a
+                                href={studioUrl}
                                 className="rounded-lg bg-foreground px-4.5 py-2.5 text-[14.5px] font-medium text-background max-md:hidden"
                             >
                                 {t.primary}
-                            </Link>
+                            </a>
                             <Link
                                 href={`/${lang}/docs`}
                                 className="rounded-lg bg-foreground px-4.5 py-2.5 text-[14.5px] font-medium text-background md:hidden"
@@ -290,7 +264,7 @@ export default async function About({ params }: Props) {
                 </section>
             </main>
 
-            <SiteFooter lang={lang} path="/about" />
+            <SiteFooter lang={lang} path="" />
         </div>
     )
 }

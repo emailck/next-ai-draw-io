@@ -50,7 +50,7 @@ export type McpTexts = {
     moreReadme: string
 }
 
-const README = "https://aicoco.xyz/en/docs/mcp-server"
+const README = "https://gravitexai.com/en/docs/mcp-server"
 
 export const TEXTS: Record<Locale, McpTexts> = {
     en: {
@@ -136,7 +136,7 @@ Then tell me how to reload so its tools show up.`,
         ],
         compareRows: [
             {
-                server: "This server, `@aicoco/mcp-server`",
+                server: "This server, `@gravitexai/mcp-server`",
                 how: "A live draw.io canvas in your browser. The AI reads it back, including your hand edits and selection; its changes are outlined, Ctrl+Z takes them back, and earlier versions can be restored",
                 fit: "You and the AI take turns on the same diagram",
             },
@@ -261,7 +261,7 @@ Then tell me how to reload so its tools show up.`,
         compareColumns: ["服务器", "如何查看和修改图表", "适合的情况"],
         compareRows: [
             {
-                server: "本服务器 `@aicoco/mcp-server`",
+                server: "本服务器 `@gravitexai/mcp-server`",
                 how: "浏览器里一块实时的 draw.io 画布。AI 能读回画布，包括您的手动修改和选中的图形；它的修改会被框出来，Ctrl+Z 可以撤回，也能恢复之前的版本",
                 fit: "您和 AI 轮流修改同一张图",
             },
@@ -386,7 +386,7 @@ Then tell me how to reload so its tools show up.`,
         compareColumns: ["サーバー", "図の見方と変え方", "向いている場面"],
         compareRows: [
             {
-                server: "このサーバー `@aicoco/mcp-server`",
+                server: "このサーバー `@gravitexai/mcp-server`",
                 how: "ブラウザのライブ draw.io キャンバス。AI は手での編集や選択も含めてキャンバスを読み取れます。AI の変更は枠で示され、Ctrl+Z で取り消せ、以前のバージョンも復元できます",
                 fit: "あなたと AI が交互に同じ図を直していくとき",
             },
@@ -511,7 +511,7 @@ Then tell me how to reload so its tools show up.`,
         compareColumns: ["伺服器", "如何查看和修改圖表", "適合的情況"],
         compareRows: [
             {
-                server: "本伺服器 `@aicoco/mcp-server`",
+                server: "本伺服器 `@gravitexai/mcp-server`",
                 how: "瀏覽器裡一塊即時的 draw.io 畫布。AI 能讀回畫布，包括您的手動修改和選取的圖形；它的修改會被框出來，Ctrl+Z 可以撤回，也能還原之前的版本",
                 fit: "您和 AI 輪流修改同一張圖",
             },

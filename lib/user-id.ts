@@ -13,7 +13,10 @@ export function getUserIdFromRequest(req: Request): string {
     const rawIp =
         (ipHeader
             ? req.headers.get(ipHeader)?.trim()
-            : req.headers.get("x-forwarded-for")?.split(",")[0].trim()) ||
+            : req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+              req.headers.get("cf-connecting-ip")?.trim() ||
+              req.headers.get("x-real-ip")?.trim() ||
+              (req.headers.get("user-agent") ? "127.0.0.1" : undefined)) ||
         "anonymous"
     return rawIp === "anonymous"
         ? rawIp

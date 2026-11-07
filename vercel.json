@@ -12,8 +12,8 @@
     "redirects": [
         {
             "source": "/:path*",
-            "has": [{ "type": "host", "value": "next-ai-draw-io.vercel.app" }],
-            "destination": "https://next-ai-drawio.jiang.jp/:path*",
+            "has": [{ "type": "host", "value": "www.gravitexai.com" }],
+            "destination": "https://gravitexai.com/:path*",
             "permanent": true
         }
     ]

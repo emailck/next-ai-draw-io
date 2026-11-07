@@ -7,7 +7,6 @@ import {
     PenTool,
     Settings2,
     ShieldCheck,
-    Sparkles,
     Sun,
     Terminal,
 } from "lucide-react"
@@ -16,7 +15,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { useChatEngine } from "@/components/chat/chat-engine"
-import { ModelConfigDialog } from "@/components/model-config-dialog"
 import { SettingsHeader } from "@/components/settings/settings-header"
 import { Button } from "@/components/ui/button"
 import {
@@ -648,14 +646,12 @@ function AboutTab() {
 export function SettingsDialog() {
     const dict = useDictionary()
     const t = dict.settings
-    const engine = useChatEngine()
     const open = useUiStore((s) => s.settingsOpen)
     const setOpen = useUiStore((s) => s.setSettingsOpen)
     const tab = useUiStore((s) => s.settingsTab)
     const setTab = useUiStore((s) => s.setSettingsTab)
 
     const tabs: { id: SettingsTab; label: string; icon: React.ReactNode }[] = [
-        { id: "models", label: t.tabModels, icon: <Sparkles /> },
         { id: "general", label: t.tabGeneral, icon: <Settings2 /> },
         { id: "drawing", label: t.tabDrawing, icon: <PenTool /> },
         { id: "about", label: t.tabAbout, icon: <Info /> },
@@ -695,27 +691,14 @@ export function SettingsDialog() {
                     <DialogDescription className="sr-only">
                         {t.description}
                     </DialogDescription>
-                    {current.id === "models" ? (
-                        <ModelConfigDialog
-                            open={open}
-                            modelConfig={engine.modelConfig}
-                        />
-                    ) : (
-                        <>
-                            <SettingsHeader>
-                                <h2 className="font-semibold">
-                                    {current.label}
-                                </h2>
-                            </SettingsHeader>
-                            <div className="min-h-0 flex-1 overflow-y-auto px-6 pb-6 scrollbar-thin">
-                                {current.id === "general" && (
-                                    <GeneralTab open={open} />
-                                )}
-                                {current.id === "drawing" && <DrawingTab />}
-                                {current.id === "about" && <AboutTab />}
-                            </div>
-                        </>
-                    )}
+                    <SettingsHeader>
+                        <h2 className="font-semibold">{current.label}</h2>
+                    </SettingsHeader>
+                    <div className="min-h-0 flex-1 overflow-y-auto px-6 pb-6 scrollbar-thin">
+                        {current.id === "general" && <GeneralTab open={open} />}
+                        {current.id === "drawing" && <DrawingTab />}
+                        {current.id === "about" && <AboutTab />}
+                    </div>
                     {/* Compliance footer at the bottom of the settings panel */}
                     <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-border bg-surface-1 px-5 py-2.5 text-[11px] text-muted-foreground">
                         <span className="truncate">{COMPANY_COPYRIGHT}</span>

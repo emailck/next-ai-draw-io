@@ -340,9 +340,7 @@ export function ChatEngineProvider({
         else sessionStorage.removeItem(SESSION_STORAGE_INPUT_KEY)
     }, [])
 
-    const quotaManager = useQuotaManager({
-        onConfigModel: () => openSettings("models"),
-    })
+    const quotaManager = useQuotaManager({})
 
     // Session ID for Langfuse tracing (restored from localStorage if available)
     const [langfuseSessionId, setLangfuseSessionId] = useState(() => {

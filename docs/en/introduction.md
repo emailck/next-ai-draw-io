@@ -1,14 +1,14 @@
 # Introduction
 
-AICoco Studio (AICoco Architecture) is an AI-powered cloud architecture and diagramming platform for software engineers, solutions architects, and DevOps teams. Describe your cloud topology or system architecture in natural language, and AICoco Studio generates an editable vector diagram on an interactive draw.io canvas. Every AI iteration is versioned and restorable.
+GRAVITEX AI Studio (GRAVITEX AI) is an AI-powered cloud architecture and diagramming platform for software engineers, solutions architects, and DevOps teams. Describe your cloud topology or system architecture in natural language, and GRAVITEX AI Studio generates an editable vector diagram on an interactive draw.io canvas. Every AI iteration is versioned and restorable.
 
 <!-- demo: tour -->
 
-## Three ways to work with AICoco Studio
+## Three ways to work with GRAVITEX AI Studio
 
 | Environment | Capabilities | Quick Start |
 |---|---|---|
-| Cloud Studio Workspace | Browser-based interactive vector canvas. AI generation credits included in your workspace plan. Free trial quota active. | [Launch AICoco Studio](/en) |
+| Cloud Studio Workspace | Browser-based interactive vector canvas. AI generation credits included in your workspace plan. Free trial quota active. | [Launch GRAVITEX AI Studio](/en) |
 | Architecture Templates | Pre-built enterprise cloud topologies for AWS, GCP, Azure, Kubernetes, and UML | [Browse Templates](/en/gallery) |
 | IDE & Agent MCP Server | Connect Claude Code, Cursor, Codex, and VS Code directly to your live architecture canvas | [Use it from Claude Code](./claude-code.md) |
 

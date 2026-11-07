@@ -1,9 +1,9 @@
 "use client"
 
 import { Check, Copy, Maximize2, SquarePen, X } from "lucide-react"
-import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import Image from "@/components/image-with-basepath"
+import { APP_URL } from "@/lib/brand"
 import { useCopy } from "@/lib/clipboard"
 import type { Locale } from "@/lib/i18n/config"
 import {
@@ -134,10 +134,8 @@ function Actions({ item, lang }: { item: GalleryItem; lang: Locale }) {
     return (
         <div className="mt-3 flex items-center gap-2">
             {!item.attachment && (
-                <Link
-                    href={`/${lang}?prompt=${encodeURIComponent(item.prompt)}`}
-                    // The editor is large: load it only when asked
-                    prefetch={false}
+                <a
+                    href={`${APP_URL}/${lang}?prompt=${encodeURIComponent(item.prompt)}`}
                     // The editor takes the prompt out of the address, which
                     // search engines report as a redirect: keep them out
                     rel="nofollow"
@@ -145,7 +143,7 @@ function Actions({ item, lang }: { item: GalleryItem; lang: Locale }) {
                 >
                     <SquarePen className="size-3.5" />
                     {t.tryPrompt}
-                </Link>
+                </a>
             )}
             <button
                 type="button"

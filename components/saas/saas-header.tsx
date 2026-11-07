@@ -5,20 +5,27 @@ import {
     CreditCard,
     Layers,
     LogIn,
+    Mail,
     Settings,
     Sparkles,
 } from "lucide-react"
 import { BrandMark } from "@/components/workspace/brand-mark"
 import { IconButton } from "@/components/workspace/icon-button"
 import { useDictionary } from "@/hooks/use-dictionary"
-import { BRAND_BADGE, BRAND_NAME } from "@/lib/brand"
+import { usePathLocale } from "@/hooks/use-path-locale"
+import {
+    BRAND_BADGE,
+    BRAND_SHORT_NAME,
+    SITE_URL,
+    SUPPORT_EMAIL,
+} from "@/lib/brand"
 import { cn } from "@/lib/utils"
 import { useUiStore } from "@/stores/ui-store"
 
 /**
- * Commercial B2B SaaS Header Navigation Bar for AICoco Studio Workspace
- * Left: AICoco Studio Logo + Product Name + light-blue BETA badge
- * Right/Center: Templates | Documentation | Pricing | Sign In / Upgrade to Pro + Settings
+ * Commercial B2B SaaS Header Navigation Bar for GRAVITEX AI Studio Workspace
+ * Left: GRAVITEX AI Logo + Brand Name + light-blue BETA badge
+ * Right/Center: Templates | Documentation | Pricing | Contact | Sign In / Upgrade to Pro + Settings
  */
 export function SaasHeader({
     className,
@@ -28,6 +35,7 @@ export function SaasHeader({
     compact?: boolean
 }) {
     const dict = useDictionary()
+    const lang = usePathLocale()
     const openSettings = useUiStore((s) => s.openSettings)
     const setPricingOpen = useUiStore((s) => s.setPricingOpen)
     const openBetaNotice = useUiStore((s) => s.openBetaNotice)
@@ -42,16 +50,19 @@ export function SaasHeader({
             )}
             data-testid="saas-header"
         >
-            {/* Left: Brand Logo + Product Name + Light-blue BETA badge */}
-            <div className="flex items-center gap-2.5">
+            {/* Left: Brand Logo + Brand Short Name + Light-blue BETA badge */}
+            <a
+                href={`${SITE_URL}/${lang}`}
+                className="flex items-center gap-2.5 transition-opacity hover:opacity-85"
+            >
                 <BrandMark className="size-7" />
                 <span className="text-[14px] font-semibold tracking-[-0.01em] text-foreground">
-                    {BRAND_NAME}
+                    {BRAND_SHORT_NAME}
                 </span>
                 <span className="inline-flex items-center rounded-md border border-blue-500/25 bg-blue-500/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wider text-blue-600 dark:text-blue-400">
                     {BRAND_BADGE}
                 </span>
-            </div>
+            </a>
 
             {/* Center / Right Navigation Items */}
             <nav
@@ -102,6 +113,20 @@ export function SaasHeader({
                         Pricing
                     </span>
                 </button>
+
+                <a
+                    href={`mailto:${SUPPORT_EMAIL}`}
+                    className={cn(
+                        "inline-flex h-8 items-center gap-1.5 rounded-lg px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
+                        compact && "px-2",
+                    )}
+                    data-testid="nav-contact"
+                >
+                    <Mail className="size-3.5" />
+                    <span className={cn(compact && "max-sm:hidden")}>
+                        Contact
+                    </span>
+                </a>
 
                 <div className="mx-1 hidden h-4 w-px bg-border sm:block" />
 

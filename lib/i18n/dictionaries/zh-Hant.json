@@ -342,7 +342,7 @@
         "myProviders": "我的服務商",
         "inUse": "正在使用",
         "listSeparator": "、",
-        "serverModelsTitle": "AICoco 雲端模型引擎",
+        "serverModelsTitle": "GRAVITEX AI 雲端模型引擎",
         "serverDefaultSummary": "AI generation credits included in your workspace plan. Free trial quota active.",
         "statusError": "{count} 個模型出錯",
         "statusIncomplete": "還沒設定完",

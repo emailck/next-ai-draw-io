@@ -10,7 +10,9 @@ import { DictionaryProvider } from "@/hooks/use-dictionary"
 import {
     BRAND_DESCRIPTION,
     BRAND_NAME,
+    BRAND_SHORT_NAME,
     BRAND_TITLE,
+    COMPANY_LEGAL_NAME,
     SUPPORT_EMAIL,
 } from "@/lib/brand"
 import type { Locale } from "@/lib/i18n/config"
@@ -75,8 +77,9 @@ export async function generateMetadata({
         title: titles[lang],
         description: descriptions[lang],
         keywords: [
-            "AICoco Studio",
-            "AICoco Architecture",
+            "GRAVITEX AI Studio",
+            "GRAVITEX AI",
+            "GRAVITEX AI GLOBAL LLC",
             "AI cloud architecture generator",
             "AWS architecture diagram",
             "GCP cloud topology",
@@ -85,15 +88,15 @@ export async function generateMetadata({
             "B2B SaaS diagramming tool",
             "draw.io AI studio",
         ],
-        authors: [{ name: BRAND_NAME }],
-        creator: BRAND_NAME,
-        publisher: BRAND_NAME,
+        authors: [{ name: COMPANY_LEGAL_NAME, url: SITE_URL }],
+        creator: COMPANY_LEGAL_NAME,
+        publisher: COMPANY_LEGAL_NAME,
         metadataBase: new URL(SITE_URL),
         openGraph: {
             title: titles[lang],
             description: descriptions[lang],
             type: "website",
-            url: `/${lang}`,
+            url: SITE_URL,
             siteName: BRAND_NAME,
             locale: OG_LOCALE[lang],
             images: [
@@ -149,7 +152,12 @@ export default async function RootLayout({
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         name: BRAND_NAME,
-        alternateName: "AICoco Architecture",
+        alternateName: BRAND_SHORT_NAME,
+        author: {
+            "@type": "Organization",
+            name: COMPANY_LEGAL_NAME,
+            url: SITE_URL,
+        },
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web, Windows, macOS, Linux",
         description: BRAND_DESCRIPTION,

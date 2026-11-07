@@ -724,14 +724,9 @@ export function MessageList() {
                         ) : notice ? (
                             <ErrorNotice
                                 text={notice.text}
-                                openModelConfig={!!notice.openModelConfig}
+                                openModelConfig={false}
                                 onOpenModelConfig={() =>
-                                    openSettings(
-                                        "models",
-                                        notice.providerId
-                                            ? { providerId: notice.providerId }
-                                            : "list",
-                                    )
+                                    openSettings("general")
                                 }
                                 onRetry={
                                     index === messages.length - 1 &&

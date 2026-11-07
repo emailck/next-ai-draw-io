@@ -231,7 +231,9 @@ describe("server model allowlist", () => {
             "x-ai-model": "gpt-5.5",
         })
         expect(res.status).toBe(400)
-        expect(await res.text()).toMatch(/not available on this server/)
+        expect(await res.text()).toMatch(
+            /not available in the current workspace plan/,
+        )
         expect(quota.checks).toBe(0)
     })
 })

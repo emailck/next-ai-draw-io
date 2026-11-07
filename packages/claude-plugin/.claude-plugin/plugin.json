@@ -1,11 +1,11 @@
 {
-    "name": "next-ai-drawio",
+    "name": "gravitex-ai-studio",
     "version": "1.0.0",
-    "description": "AI-powered Draw.io diagram generation with real-time browser preview. Create flowcharts, architecture diagrams, and more through natural language.",
+    "description": "GRAVITEX AI Studio - AI Cloud Architecture & Diagram Generator with real-time browser preview.",
     "author": {
-        "name": "DayuanJiang"
+        "name": "GRAVITEX AI GLOBAL LLC"
     },
-    "repository": "https://github.com/DayuanJiang/next-ai-draw-io",
-    "homepage": "https://next-ai-drawio.jiang.jp",
-    "license": "Apache-2.0"
+    "repository": "https://gravitexai.com",
+    "homepage": "https://gravitexai.com",
+    "license": "UNLICENSED"
 }

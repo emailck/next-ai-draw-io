@@ -1,6 +1,6 @@
-# Next AI Draw.io MCP Server
+# GRAVITEX AI Studio MCP Server
 
-An MCP server that lets Claude Code, Cursor, VS Code and other AI agents draw draw.io diagrams from your project's files, with a live preview in your browser. The preview is the canvas of the [Next AI Draw.io web app](https://next-ai-drawio.jiang.jp/): the AI's changes are outlined, Ctrl+Z takes them back, and you can edit by hand at any time.
+An MCP server that lets Claude Code, Cursor, VS Code and other AI agents draw draw.io diagrams from your project's files, with a live preview in your browser. The preview is the canvas of the [GRAVITEX AI Studio web app](https://gravitexai.com/): the AI's changes are outlined, Ctrl+Z takes them back, and you can edit by hand at any time.
 
 https://github.com/user-attachments/assets/6f53a67b-ab21-4113-9fee-7fb32f9de678
 
@@ -25,7 +25,7 @@ Then tell me how to reload so its tools show up.
 **Claude Code**
 
 ```bash
-claude mcp add --scope user drawio -- npx @next-ai-drawio/mcp-server@latest
+claude mcp add --scope user drawio -- npx @gravitexai/mcp-server@latest
 ```
 
 `--scope user` makes the tools available in every project. Without it, they exist only in the folder where you ran the command.
@@ -39,7 +39,7 @@ Or install it as a plugin from the Claude Code community marketplace (Claude Cod
 **Codex CLI**
 
 ```bash
-codex mcp add drawio -- npx @next-ai-drawio/mcp-server@latest
+codex mcp add drawio -- npx @gravitexai/mcp-server@latest
 ```
 
 Codex asks before each drawio tool that changes the diagram, and `codex exec` without full access fails with "MCP tool call requires approval". To let the drawio tools run without asking, add one line to the server's section in `~/.codex/config.toml`:
@@ -47,7 +47,7 @@ Codex asks before each drawio tool that changes the diagram, and `codex exec` wi
 ```toml
 [mcp_servers.drawio]
 command = "npx"
-args = ["@next-ai-drawio/mcp-server@latest"]
+args = ["@gravitexai/mcp-server@latest"]
 default_tools_approval_mode = "approve"
 ```
 
@@ -58,7 +58,7 @@ To approve only some tools, use `[mcp_servers.drawio.tools.<tool name>]` with `a
 ```json
 {
   "servers": {
-    "drawio": { "type": "stdio", "command": "npx", "args": ["@next-ai-drawio/mcp-server@latest"] }
+    "drawio": { "type": "stdio", "command": "npx", "args": ["@gravitexai/mcp-server@latest"] }
   }
 }
 ```
@@ -74,7 +74,7 @@ dsh plugin --profile web add @next-ai-drawio/dsh
 ```json
 {
   "mcpServers": {
-    "drawio": { "command": "npx", "args": ["@next-ai-drawio/mcp-server@latest"] }
+    "drawio": { "command": "npx", "args": ["@gravitexai/mcp-server@latest"] }
   }
 }
 ```
@@ -97,7 +97,7 @@ Several MCP servers draw draw.io diagrams. As of October 2026 they differ like t
 
 | Server | How you see and change the diagram | A good fit when |
 |---|---|---|
-| This server, `@next-ai-drawio/mcp-server` | A live draw.io canvas in your browser. The AI reads it back, including your hand edits and selection; its changes are outlined, Ctrl+Z takes them back, and earlier versions can be restored | You and the AI take turns on the same diagram |
+| This server, `@gravitexai/mcp-server` | A live draw.io canvas in your browser. The AI reads it back, including your hand edits and selection; its changes are outlined, Ctrl+Z takes them back, and earlier versions can be restored | You and the AI take turns on the same diagram |
 | draw.io's official [`@drawio/mcp`](https://github.com/jgraph/drawio-mcp) | Opens each diagram from XML, CSV or Mermaid in the draw.io editor in a new tab; no tool reads it back | You want the diagram in the full draw.io editor and edit it yourself from there |
 | draw.io's hosted MCP app, `https://mcp.draw.io/mcp` | Shows the diagram inside the chat in Claude.ai, ChatGPT, VS Code or Cursor, with nothing to install; the diagram is sent to draw.io's server | You work in a chat app and want to see the diagram in the conversation |
 | draw.io's plugin for Claude Code, Codex CLI and Copilot CLI | A skill that writes `.drawio` files; PNG, SVG and PDF export needs draw.io Desktop | You want diagram files in your repository without an MCP server |

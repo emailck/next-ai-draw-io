@@ -21,22 +21,22 @@ import { localeAlternates, OG_IMAGE, OG_LOCALE, SITE_URL } from "@/lib/seo"
 import { type InstallTab, InstallTabs } from "./install-tabs"
 import { TEXTS } from "./texts"
 
-const PACKAGE = "npx @aicoco/mcp-server@latest"
+const PACKAGE = "npx @gravitexai/mcp-server@latest"
 
 const CODEX_TOML = `[mcp_servers.drawio]
 command = "npx"
-args = ["@aicoco/mcp-server@latest"]
+args = ["@gravitexai/mcp-server@latest"]
 default_tools_approval_mode = "approve"`
 
 const VSCODE_JSON = `{
   "servers": {
-    "drawio": { "type": "stdio", "command": "npx", "args": ["@aicoco/mcp-server@latest"] }
+    "drawio": { "type": "stdio", "command": "npx", "args": ["@gravitexai/mcp-server@latest"] }
   }
 }`
 
 const OTHERS_JSON = `{
   "mcpServers": {
-    "drawio": { "command": "npx", "args": ["@aicoco/mcp-server@latest"] }
+    "drawio": { "command": "npx", "args": ["@gravitexai/mcp-server@latest"] }
   }
 }`
 
@@ -106,7 +106,7 @@ export default async function Mcp({ params }: Props) {
                 { note: t.notes.claudeScope },
                 { note: t.notes.claudePlugin },
                 {
-                    code: "/plugin install aicoco-studio --marketplace anthropics/claude-plugins-community",
+                    code: "/plugin install gravitex-ai-studio --marketplace anthropics/claude-plugins-community",
                 },
             ],
         },
@@ -168,7 +168,7 @@ export default async function Mcp({ params }: Props) {
                     "@context": "https://schema.org",
                     "@type": "SoftwareApplication",
                     name: `${BRAND_NAME} MCP Server`,
-                    alternateName: "@aicoco/mcp-server",
+                    alternateName: "@gravitexai/mcp-server",
                     applicationCategory: "DeveloperApplication",
                     operatingSystem: "Windows, macOS, Linux",
                     softwareRequirements: "Node.js 18 or later",

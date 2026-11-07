@@ -171,8 +171,26 @@ export function Composer({
         modelConfig,
     } = engine
     const sendShortcut = useSettingsStore((s) => s.sendShortcut)
-    const openSettings = useUiStore((s) => s.openSettings)
     const focusToken = useUiStore((s) => s.focusComposerToken)
+    const serverModels = modelConfig.models.filter((m) => m.source === "server")
+
+    useEffect(() => {
+        if (
+            modelConfig.isLoaded &&
+            modelConfig.selectedModelId &&
+            !modelConfig.selectedModelId.startsWith("server:")
+        ) {
+            const fallback = (
+                serverModels.find((m) => m.isDefault) ?? serverModels[0]
+            )?.id
+            modelConfig.setSelectedModelId(fallback)
+        }
+    }, [
+        modelConfig.isLoaded,
+        modelConfig.selectedModelId,
+        modelConfig.setSelectedModelId,
+        serverModels,
+    ])
 
     const formRef = useRef<HTMLFormElement>(null)
     const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -511,11 +529,9 @@ export function Composer({
 
                 <div className="ml-auto flex min-w-0 flex-1 items-center justify-end gap-1">
                     <ModelSelector
-                        models={modelConfig.models}
+                        models={serverModels}
                         selectedModelId={modelConfig.selectedModelId}
                         onSelect={modelConfig.setSelectedModelId}
-                        onConfigure={() => openSettings("models")}
-                        onAddProvider={() => openSettings("models", "picker")}
                         disabled={isDisabled}
                     />
                     {!isBusy && input.trim() && (

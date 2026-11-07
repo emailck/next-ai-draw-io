@@ -342,7 +342,7 @@
         "myProviders": "My providers",
         "inUse": "In use",
         "listSeparator": ", ",
-        "serverModelsTitle": "AICoco Cloud Models",
+        "serverModelsTitle": "GRAVITEX AI Cloud Models",
         "serverDefaultSummary": "AI generation credits included in your workspace plan. Free trial quota active.",
         "statusError": "{count} failed",
         "statusIncomplete": "Not set up yet",

@@ -5,13 +5,13 @@ import {
 } from "@/lib/brand"
 import type { Locale } from "@/lib/i18n/config"
 
-export const NPM_URL = "https://aicoco.xyz/en/mcp"
+export const NPM_URL = "https://gravitexai.com/en/mcp"
 export const MCP_INSTALL =
-    "claude mcp add --scope user drawio -- npx @aicoco/mcp-server@latest"
+    "claude mcp add --scope user drawio -- npx @gravitexai/mcp-server@latest"
 
 const MCP_SERVER = {
     command: "npx",
-    args: ["@aicoco/mcp-server@latest"],
+    args: ["@gravitexai/mcp-server@latest"],
 }
 export const MCP_VSCODE_INSTALL_URL = `https://insiders.vscode.dev/redirect?url=${encodeURIComponent(
     `vscode:mcp/install?${encodeURIComponent(JSON.stringify({ name: "drawio", ...MCP_SERVER }))}`,
@@ -83,7 +83,7 @@ export const SITE_TEXTS: Record<Locale, SiteTexts> = {
         footer: {
             tagline: BRAND_DESCRIPTION,
             product: "Platform",
-            editor: "AICoco Studio Workspace",
+            editor: "GRAVITEX AI Studio",
             templates: "Cloud Architecture Templates",
             pricing: "Subscription Pricing",
             mcp: "Agent MCP Integration",
@@ -117,7 +117,7 @@ export const SITE_TEXTS: Record<Locale, SiteTexts> = {
         footer: {
             tagline: BRAND_DESCRIPTION,
             product: "产品平台",
-            editor: "AICoco Studio 工作台",
+            editor: "GRAVITEX AI Studio 工作台",
             templates: "云架构与拓扑模板",
             pricing: "商业订阅方案",
             mcp: "MCP 智能体集成",
@@ -151,7 +151,7 @@ export const SITE_TEXTS: Record<Locale, SiteTexts> = {
         footer: {
             tagline: BRAND_DESCRIPTION,
             product: "プラットフォーム",
-            editor: "AICoco Studio ワークスペース",
+            editor: "GRAVITEX AI Studio ワークスペース",
             templates: "クラウド構成テンプレート",
             pricing: "料金プラン",
             mcp: "MCP サーバー統合",
@@ -185,7 +185,7 @@ export const SITE_TEXTS: Record<Locale, SiteTexts> = {
         footer: {
             tagline: BRAND_DESCRIPTION,
             product: "產品平台",
-            editor: "AICoco Studio 工作台",
+            editor: "GRAVITEX AI Studio 工作台",
             templates: "雲架構與拓撲模板",
             pricing: "商業訂閱方案",
             mcp: "MCP 智慧體整合",

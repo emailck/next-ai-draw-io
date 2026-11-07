@@ -1,6 +1,6 @@
-appId: com.nextaidrawio.app
-productName: Next AI Draw.io
-copyright: Copyright © 2024 Next AI Draw.io
+appId: com.gravitexai.studio
+productName: GRAVITEX AI Studio
+copyright: © 2026 GRAVITEX AI GLOBAL LLC. All rights reserved.
 
 directories:
   output: release
@@ -84,7 +84,7 @@ nsis:
 linux:
   icon: resources/icon.png
   category: Office
-  maintainer: Next AI Draw.io <nextaidrawio@users.noreply.github.com>
+  maintainer: GRAVITEX AI GLOBAL LLC <support@gravitexai.com>
   target:
     - target: AppImage
       arch:

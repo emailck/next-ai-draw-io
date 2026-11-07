@@ -57,7 +57,7 @@ export const useUiStore = create<UiState>((set) => ({
     heroDismissed: false,
     mobileView: "chat",
     settingsOpen: false,
-    settingsTab: "models",
+    settingsTab: "general",
     modelsPage: "list",
     compareVersionId: null,
     saveDialogOpen: false,

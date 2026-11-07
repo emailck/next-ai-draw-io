@@ -113,17 +113,13 @@ function getMenuTemplate(): MenuItemConstructorOptions[] {
             {
                 label: t.documentation,
                 click: async () => {
-                    await shell.openExternal(
-                        "https://github.com/dayuanjiang/next-ai-draw-io",
-                    )
+                    await shell.openExternal("https://gravitexai.com/en/docs")
                 },
             },
             {
                 label: t.reportIssue,
                 click: async () => {
-                    await shell.openExternal(
-                        "https://github.com/dayuanjiang/next-ai-draw-io/issues",
-                    )
+                    await shell.openExternal("mailto:support@gravitexai.com")
                 },
             },
         ],

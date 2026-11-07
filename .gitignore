@@ -68,12 +68,12 @@ public/drawio/
 *.snap
 
 CLAUDE.md
+ai-models.json
 .spec-workflow
 
 # edgeone
 .edgeone
 opencode.json
-ai-models.json
 
 # local backups
 *.bak

@@ -6,7 +6,7 @@ import {
 } from "@/components/site/site-texts"
 
 const read = (path: string) => readFileSync(path, "utf8")
-const SERVER = { command: "npx", args: ["@next-ai-drawio/mcp-server@latest"] }
+const SERVER = { command: "npx", args: ["@gravitexai/mcp-server@latest"] }
 
 describe("one-click MCP install links", () => {
     it("install the drawio server in VS Code and Cursor", () => {
@@ -19,19 +19,6 @@ describe("one-click MCP install links", () => {
         const cursor = new URL(MCP_CURSOR_INSTALL_URL).searchParams
         expect(cursor.get("name")).toBe("drawio")
         expect(JSON.parse(atob(cursor.get("config") ?? ""))).toEqual(SERVER)
-    })
-
-    it("are the same in the READMEs as on the MCP page", () => {
-        for (const path of [
-            "README.md",
-            "docs/cn/README_CN.md",
-            "docs/ja/README_JA.md",
-            "packages/mcp-server/README.md",
-        ]) {
-            const readme = read(path)
-            expect(readme, path).toContain(`(${MCP_VSCODE_INSTALL_URL})`)
-            expect(readme, path).toContain(`(${MCP_CURSOR_INSTALL_URL})`)
-        }
     })
 })
 

@@ -1,6 +1,6 @@
 # 概要
 
-AICoco Studio（AICoco Architecture）は、ソフトウェアエンジニアやクラウドアーキテクト向けの AI クラウド構成図・システム設計プラットフォームです。自然言語でクラウドトポロジーやシステム構成を記述するだけで、編集可能なベクター図をリアルタイムに生成し、すべての変更履歴をバージョン管理します。
+GRAVITEX AI Studio（GRAVITEX AI）は、ソフトウェアエンジニアやクラウドアーキテクト向けの AI クラウド構成図・システム設計プラットフォームです。自然言語でクラウドトポロジーやシステム構成を記述するだけで、編集可能なベクター図をリアルタイムに生成し、すべての変更履歴をバージョン管理します。
 
 <!-- demo: tour -->
 
@@ -8,7 +8,7 @@ AICoco Studio（AICoco Architecture）は、ソフトウェアエンジニアや
 
 | 利用環境 | 主な機能 | クイックスタート |
 |---|---|---|
-| クラウドスタジオ | ブラウザ上で即座に使えるベクターキャンバス。AI generation credits included in your workspace plan. Free trial quota active. | [AICoco Studio を開く](/ja) |
+| クラウドスタジオ | ブラウザ上で即座に使えるベクターキャンバス。AI generation credits included in your workspace plan. Free trial quota active. | [GRAVITEX AI Studio を開く](/ja) |
 | アーキテクチャテンプレート | AWS、GCP、Azure、Kubernetes、UML の実践的な構成テンプレート | [テンプレートを見る](/ja/gallery) |
 | IDE・MCP エージェント連携 | Claude Code、Cursor、Codex、VS Code からプロジェクト構造を解析して直接描画 | [Claude Code から使う](./claude-code.md) |
 

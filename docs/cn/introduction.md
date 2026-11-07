@@ -1,6 +1,6 @@
 # 简介
 
-AICoco Studio（AICoco Architecture）是面向全球软件工程师、系统架构师与 DevOps 团队的商业化 AI 云架构与系统拓扑设计平台。只需用自然语言描述您的云架构或系统拓扑，AICoco Studio 即可在交互式矢量画布上实时生成可编辑的架构图，且每次迭代均自动保存为可回溯的版本快照。
+GRAVITEX AI Studio（GRAVITEX AI）是面向全球软件工程师、系统架构师与 DevOps 团队的商业化 AI 云架构与系统拓扑设计平台。只需用自然语言描述您的云架构或系统拓扑，GRAVITEX AI Studio 即可在交互式矢量画布上实时生成可编辑的架构图，且每次迭代均自动保存为可回溯的版本快照。
 
 <!-- demo: tour -->
 
@@ -8,7 +8,7 @@ AICoco Studio（AICoco Architecture）是面向全球软件工程师、系统架
 
 | 使用场景 | 核心能力 | 快速开始 |
 |---|---|---|
-| 云端矢量工作台 | 浏览器即开即用的交互式架构画布。AI generation credits included in your workspace plan. Free trial quota active. | [启动 AICoco Studio](/zh) |
+| 云端矢量工作台 | 浏览器即开即用的交互式架构画布。AI generation credits included in your workspace plan. Free trial quota active. | [启动 GRAVITEX AI Studio](/zh) |
 | 企业级云架构模板库 | 预置 AWS、GCP、Azure、Kubernetes 与 UML 生产级架构蓝图 | [浏览架构模板](/zh/gallery) |
 | IDE 与智能体 MCP 集成 | 支持 Claude Code、Cursor、Codex 和 VS Code 根据代码库直接生成实时架构图 | [在 Claude Code 里使用](./claude-code.md) |
 

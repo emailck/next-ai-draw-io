@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { i18n, type Locale } from "@/lib/i18n/config"
 
-export const SITE_URL = "https://aicoco.xyz"
+export const SITE_URL = "https://gravitexai.com"
 
 export const OG_LOCALE: Record<Locale, string> = {
     en: "en_US",

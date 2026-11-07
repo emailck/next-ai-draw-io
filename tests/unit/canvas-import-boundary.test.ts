@@ -41,7 +41,7 @@ function listFiles(entry: string): string[] {
     return readdirSync(full, { recursive: true })
         .map(String)
         .filter((name) => /\.tsx?$/.test(name))
-        .map((name) => path.join(entry, name))
+        .map((name) => path.join(entry, name).replace(/\\/g, "/"))
 }
 
 /** Module specifiers a file imports at runtime (type-only imports do not
@@ -77,7 +77,7 @@ function resolveLocal(fromFile: string, specifier: string): string | null {
         path.join(base, "index.tsx"),
     ]) {
         if (existsSync(candidate) && statSync(candidate).isFile()) {
-            return path.relative(root, candidate)
+            return path.relative(root, candidate).replace(/\\/g, "/")
         }
     }
     return null

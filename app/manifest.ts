@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next"
 import { getAssetUrl } from "@/lib/base-path"
-import { BRAND_DESCRIPTION, BRAND_NAME, BRAND_TITLE } from "@/lib/brand"
+import { BRAND_DESCRIPTION, BRAND_SHORT_NAME, BRAND_TITLE } from "@/lib/brand"
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
         name: BRAND_TITLE,
-        short_name: BRAND_NAME,
+        short_name: BRAND_SHORT_NAME,
         description: BRAND_DESCRIPTION,
         start_url: getAssetUrl("/"),
         display: "standalone",

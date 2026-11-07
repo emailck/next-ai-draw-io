@@ -3,9 +3,12 @@ import {
     DynamoDBClient,
     UpdateItemCommand,
 } from "@aws-sdk/client-dynamodb"
+import fs from "fs"
+import path from "path"
 
-// Quota tracking is OPT-IN: only enabled if DYNAMODB_QUOTA_TABLE is explicitly set
-// OSS users who don't need quota tracking can simply not set this env var
+// Quota tracking is enabled by default (uses DynamoDB when DYNAMODB_QUOTA_TABLE
+// is set, otherwise falls back to built-in local storage in data/quota.json).
+// Set ENABLE_QUOTA=false to disable quota enforcement completely.
 const TABLE = process.env.DYNAMODB_QUOTA_TABLE
 const DYNAMODB_REGION = process.env.DYNAMODB_REGION || "ap-northeast-1"
 // Timezone for daily quota reset (e.g., "Asia/Tokyo" for JST midnight reset)
@@ -34,15 +37,75 @@ function getTodayInTimezone(): string {
     }).format(new Date())
 }
 
-// Only create client if quota is enabled
+// Only create DynamoDB client if table is configured
 const client = TABLE ? new DynamoDBClient({ region: DYNAMODB_REGION }) : null
+
+interface LocalQuotaRecord {
+    reqCount: number
+    tokenCount: number
+    lastMinute: string
+    tpmCount: number
+}
+
+interface LocalQuotaStore {
+    date: string
+    records: Record<string, LocalQuotaRecord>
+}
+
+const globalQuotaState = globalThis as typeof globalThis & {
+    __localQuotaStore?: LocalQuotaStore
+}
+
+function getLocalQuotaFilePath(): string {
+    return path.join(process.cwd(), "data", "quota.json")
+}
+
+function getLocalStore(today: string): LocalQuotaStore {
+    if (!globalQuotaState.__localQuotaStore && !process.env.VITEST) {
+        try {
+            const raw = fs.readFileSync(getLocalQuotaFilePath(), "utf8")
+            const parsed = JSON.parse(raw) as LocalQuotaStore
+            if (
+                parsed &&
+                typeof parsed.date === "string" &&
+                parsed.records &&
+                typeof parsed.records === "object"
+            ) {
+                globalQuotaState.__localQuotaStore = parsed
+            }
+        } catch {
+            // File does not exist yet or is unreadable — start fresh
+        }
+    }
+    if (
+        !globalQuotaState.__localQuotaStore ||
+        globalQuotaState.__localQuotaStore.date !== today
+    ) {
+        globalQuotaState.__localQuotaStore = {
+            date: today,
+            records: {},
+        }
+    }
+    return globalQuotaState.__localQuotaStore
+}
+
+function persistLocalStore(store: LocalQuotaStore): void {
+    if (process.env.VITEST) return
+    try {
+        const filePath = getLocalQuotaFilePath()
+        fs.mkdirSync(path.dirname(filePath), { recursive: true })
+        fs.writeFileSync(filePath, JSON.stringify(store, null, 2), "utf8")
+    } catch {
+        // Ignore write errors on read-only filesystems (in-memory store still works)
+    }
+}
 
 /**
  * Check if server-side quota tracking is enabled.
- * Quota is opt-in: only enabled when DYNAMODB_QUOTA_TABLE env var is set.
+ * Enabled by default (10 requests/IP/day) unless ENABLE_QUOTA=false.
  */
 export function isQuotaEnabled(): boolean {
-    return !!TABLE
+    return process.env.ENABLE_QUOTA !== "false"
 }
 
 interface QuotaLimits {
@@ -71,14 +134,61 @@ export async function checkAndIncrementRequest(
     limits: QuotaLimits,
     increment = 1,
 ): Promise<QuotaCheckResult> {
-    // Skip if quota tracking not enabled
-    if (!client) {
+    if (!isQuotaEnabled()) {
         return { allowed: true }
     }
 
     const pk = ip // User identifier (base64 IP)
     const sk = getTodayInTimezone() // Date as sort key (YYYY-MM-DD)
     const currentMinute = Math.floor(Date.now() / 60000).toString()
+
+    // Built-in local quota enforcement when DynamoDB is not configured
+    if (!client) {
+        const store = getLocalStore(sk)
+        const record = store.records[pk] ?? {
+            reqCount: 0,
+            tokenCount: 0,
+            lastMinute: currentMinute,
+            tpmCount: 0,
+        }
+        const tpmCount =
+            record.lastMinute === currentMinute ? record.tpmCount : 0
+
+        if (limits.requests > 0 && record.reqCount >= limits.requests) {
+            return {
+                allowed: false,
+                type: "request",
+                error: "Daily request limit exceeded",
+                used: record.reqCount,
+                limit: limits.requests,
+            }
+        }
+        if (limits.tokens > 0 && record.tokenCount >= limits.tokens) {
+            return {
+                allowed: false,
+                type: "token",
+                error: "Daily token limit exceeded",
+                used: record.tokenCount,
+                limit: limits.tokens,
+            }
+        }
+        if (limits.tpm > 0 && tpmCount >= limits.tpm) {
+            return {
+                allowed: false,
+                type: "tpm",
+                error: "Rate limit exceeded (tokens per minute)",
+                used: tpmCount,
+                limit: limits.tpm,
+            }
+        }
+
+        if (increment > 0) {
+            record.reqCount += increment
+            store.records[pk] = record
+            persistLocalStore(store)
+        }
+        return { allowed: true }
+    }
 
     try {
         // Single atomic update - handles creation AND increment
@@ -181,13 +291,32 @@ export async function recordTokenUsage(
     ip: string,
     tokens: number,
 ): Promise<void> {
-    // Skip if quota tracking not enabled
-    if (!client) return
+    if (!isQuotaEnabled()) return
     if (!Number.isFinite(tokens) || tokens <= 0) return
 
     const pk = ip // User identifier (base64 IP)
     const sk = getTodayInTimezone() // Date as sort key (YYYY-MM-DD)
     const currentMinute = Math.floor(Date.now() / 60000).toString()
+
+    if (!client) {
+        const store = getLocalStore(sk)
+        const record = store.records[pk] ?? {
+            reqCount: 0,
+            tokenCount: 0,
+            lastMinute: currentMinute,
+            tpmCount: 0,
+        }
+        record.tokenCount += tokens
+        if (record.lastMinute === currentMinute) {
+            record.tpmCount += tokens
+        } else {
+            record.lastMinute = currentMinute
+            record.tpmCount = tokens
+        }
+        store.records[pk] = record
+        persistLocalStore(store)
+        return
+    }
 
     try {
         // Try to update for same minute OR new item (most common cases)

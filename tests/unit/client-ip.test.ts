@@ -53,6 +53,7 @@ describe("ORIGIN_SECRET", () => {
     it("leaves pages alone, such as the health check on /", () => {
         vi.stubEnv("ORIGIN_SECRET", "s3cret")
         expect(call("/")?.status).toBe(307)
-        expect(call("/en")).toBeUndefined()
+        expect(call("/en")?.status).toBe(200)
+        expect(call("/en/docs")).toBeUndefined()
     })
 })

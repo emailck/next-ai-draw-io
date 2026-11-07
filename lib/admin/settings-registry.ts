@@ -63,8 +63,7 @@ export const SETTING_GROUPS: SettingGroup[] = [
         id: "quota",
         title: "Quota & Rate Limits",
         description:
-            "Per-IP usage limits. Enforcement requires a DynamoDB table.",
-        toggleable: true,
+            "Per-IP daily usage limits (enabled by default: 10 requests/IP/day; uses built-in local storage or DynamoDB).",
     },
 ]
 
@@ -160,11 +159,22 @@ export const SETTINGS_REGISTRY: SettingDef[] = [
 
     // ── Quota ────────────────────────────────────────────────────────
     {
+        key: "ENABLE_QUOTA",
+        group: "quota",
+        type: "boolean",
+        label: "Enable Per-IP Quota",
+        description:
+            "Enforce daily per-IP request and token limits (enabled by default).",
+        default: "true",
+    },
+    {
         key: "DAILY_REQUEST_LIMIT",
         group: "quota",
         type: "number",
         label: "Daily Request Limit",
-        description: "Per IP per day.",
+        description: "Per IP per day (defaults to 10).",
+        default: "10",
+        placeholder: "10",
         min: 1,
     },
     {
@@ -172,7 +182,9 @@ export const SETTINGS_REGISTRY: SettingDef[] = [
         group: "quota",
         type: "number",
         label: "Daily Token Limit",
-        description: "Per IP per day.",
+        description: "Per IP per day (defaults to 200000).",
+        default: "200000",
+        placeholder: "200000",
         min: 1,
     },
     {
@@ -180,14 +192,26 @@ export const SETTINGS_REGISTRY: SettingDef[] = [
         group: "quota",
         type: "number",
         label: "Tokens Per Minute",
+        default: "20000",
+        placeholder: "20000",
         min: 1,
+    },
+    {
+        key: "CLIENT_IP_HEADER",
+        group: "quota",
+        type: "string",
+        label: "Client IP Header (CDN / Cloudflare)",
+        description:
+            "Set to cf-connecting-ip behind Cloudflare to prevent X-Forwarded-For spoofing.",
+        placeholder: "cf-connecting-ip",
     },
     {
         key: "DYNAMODB_QUOTA_TABLE",
         group: "quota",
         type: "string",
-        label: "DynamoDB Table",
-        description: "Quota enforcement is disabled when empty.",
+        label: "DynamoDB Table (Optional)",
+        description:
+            "Uses built-in local storage (data/quota.json) when empty.",
         restartRequired: true,
     },
     {

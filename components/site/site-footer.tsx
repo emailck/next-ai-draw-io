@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { BrandMark } from "@/components/workspace/brand-mark"
 import {
+    APP_URL,
     BRAND_ALT_NAME,
     BRAND_BADGE,
     BRAND_NAME,
@@ -11,17 +12,18 @@ import { i18n, type Locale } from "@/lib/i18n/config"
 import { LANGUAGE_NAMES, SITE_TEXTS } from "./site-texts"
 
 /**
- * Commercial Compliance Footer at the bottom of site pages (/about, /gallery, /docs, /mcp, /legal).
+ * Commercial Compliance Footer at the bottom of site pages (/, /about, /gallery, /docs, /mcp, /legal).
  */
 export function SiteFooter({ lang, path }: { lang: Locale; path: string }) {
     const t = SITE_TEXTS[lang].footer
+    const studioUrl = `${APP_URL}/${lang}`
     const columns = [
         {
             title: t.product,
             links: [
-                { label: t.editor, href: `/${lang}` },
+                { label: t.editor, href: studioUrl },
                 { label: t.templates, href: `/${lang}/gallery` },
-                { label: t.pricing, href: `/${lang}/about#pricing` },
+                { label: t.pricing, href: `/${lang}#pricing` },
                 { label: t.docs, href: `/${lang}/docs` },
                 { label: t.mcp, href: `/${lang}/mcp` },
             ],
@@ -41,7 +43,7 @@ export function SiteFooter({ lang, path }: { lang: Locale; path: string }) {
             <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-9 px-5 pt-10 pb-9 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] md:gap-10 md:px-8 md:pt-12 md:pb-10">
                 <div className="col-span-2 md:col-span-1">
                     <Link
-                        href={`/${lang}/about`}
+                        href={`/${lang}`}
                         className="flex items-center gap-2.5"
                     >
                         <BrandMark className="size-6" />

@@ -1,9 +1,11 @@
 import { timingSafeEqual } from "crypto"
 
 // Shared auth for admin API routes: compares x-admin-password header
-// against the ADMIN_PASSWORD env var. Unset password = panel disabled.
+// against the ADMIN_PASSWORD env var (defaults to "admin" in local development).
 export function checkAdminAuth(req: Request): Response | null {
-    const password = process.env.ADMIN_PASSWORD
+    const password =
+        process.env.ADMIN_PASSWORD ||
+        (process.env.NODE_ENV === "development" ? "admin" : undefined)
     if (!password) {
         return Response.json(
             {

@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils"
 import { useUiStore } from "@/stores/ui-store"
 
 /**
- * Standard Compliance Footer for AICoco Studio (Stripe & Bank Audit Ready)
+ * Standard Compliance Footer for GRAVITEX AI Studio (Stripe & Bank Audit Ready)
  * Includes:
- * 1. Statutory LLC Copyright line
- * 2. Commercial support email (Support: contact@aicoco.xyz)
+ * 1. Statutory LLC Copyright line (© 2026 GRAVITEX AI GLOBAL LLC. All rights reserved.)
+ * 2. Commercial support email (Support: support@gravitexai.com)
  * 3. Legal modal triggers (Terms of Service, Privacy Policy, Acceptable Use Policy)
  */
 export function SaasFooter({ className }: { className?: string }) {

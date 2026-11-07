@@ -1,8 +1,8 @@
-# AICoco Studio (AICoco Architecture) 商业化与去开源化改造需求文档
+# GRAVITEX AI Studio (GRAVITEX AI) 商业化与去开源化改造需求文档
 
 > **文档版本**：v1.0  
 > **最后更新**：2026-11-06  
-> **产品品牌**：AICoco Studio / AICoco Architecture  
+> **产品品牌**：GRAVITEX AI Studio / GRAVITEX AI  
 > **定位**：面向全球软件工程师与系统架构师的商业化 B2B SaaS 云架构与图表生成平台
 
 ---
@@ -20,16 +20,16 @@
 #### 1. 全局清理外链与标识
 - 移除所有指向原 GitHub 仓库（`https://github.com/DayuanJiang/next-ai-draw-io`）、Releases、Issues、Sponsor（`https://github.com/sponsors/DayuanJiang`）的链接与 Star 徽章（`githubStars`）。
 - 移除原作者个人社交账号、个人域名（`next-ai-drawio.jiang.jp`）及个人邮箱（`me[at]jiang.jp`）。
-- 将全站所有 `"Next AI Draw.io"` / `"Powered by next-ai-draw-io"` 品牌名称统一替换为 `"AICoco Studio"`（或 `"AICoco Architecture"`）。
+- 将全站所有 `"Next AI Draw.io"` / `"Powered by next-ai-draw-io"` 品牌名称统一替换为 `"GRAVITEX AI Studio"`（或 `"GRAVITEX AI"`）。
 - 移除顶部导航栏（`SiteHeader`）、移动端抽屉菜单（`SiteMenu`）、设置面板（`SettingsDialog` -> `AboutTab`）、配额提示（`QuotaLimitToast`）及文档页中的 `"GitHub"` / `"Star on GitHub"` / `"Edit this page on GitHub"` 按钮。
 
 #### 2. 替换品牌资产
 - **网页 Metadata (`title` & `meta description`)**：
-  - **Title**: `AICoco Studio - AI-Powered Cloud Architecture & Diagram Generator`
+  - **Title**: `GRAVITEX AI Studio - AI Cloud Architecture & Diagram Generator`
   - **Description**: `Generate, edit, and collaborate on AWS/GCP cloud topologies, UML diagrams, and system architecture with natural language.`
 - **品牌视觉与图标**：
   - 替换浏览器 Favicon（新增现代科技风 SVG 图标 `app/icon.svg` 与 `public/logo.svg`）及全站 `BrandMark` 导航栏 Logo，采用蓝紫渐变立体拓扑/云架构科技风独立品牌 SVG 图标，停用原开源默认图标。
-  - 更新 `app/manifest.ts`、`lib/seo.ts` 及 JSON-LD 结构化数据为 `AICoco Studio` 商业 SaaS 信息。
+  - 更新 `app/manifest.ts`、`lib/seo.ts` 及 JSON-LD 结构化数据为 `GRAVITEX AI Studio` 商业 SaaS 信息。
 
 #### 3. 消除本地测试与开源提示痕迹
 - 全面排查并清理前端提示语与多语言字典（`en.json`、`zh.json`、`ja.json`、`zh-Hant.json`）中类似 `"Please configure your OpenAI API Key"`、`"Use your own API key"`、`"Add your own API key in model settings"`、`"Self-host"` 等开源单机版话术。
@@ -44,7 +44,7 @@
 将工作区顶部导航栏（`WorkspaceHeader` / `StartBar`）及站点级顶部导航栏（`SiteHeader`）统一改造为标准商业 SaaS 顶部导航结构：
 
 - **左侧品牌区**：
-  - `AICoco Studio` 独立品牌 SVG Logo + 产品名称 `AICoco Studio`
+  - `GRAVITEX AI Studio` 独立品牌 SVG Logo + 产品名称 `GRAVITEX AI Studio`
   - 品牌名称右侧紧跟淡蓝色胶囊小标签：`BETA`（样式：`bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20`）
 - **中间/右侧核心菜单项**：
   1. `Templates`：预置云架构与流程图模板（点击弹出预置云架构模板选择弹窗或跳转至架构模板中心）
@@ -87,10 +87,10 @@
 在应用主界面底部（Lobby 视图底部）、设置面板底部（`SettingsDialog` -> `AboutTab`）及站点页脚（`SiteFooter`）全面配置标准合规商业页脚：
 
 1. **公司法定版权落款**：
-   - `© 2026 [请在此预留我的 LLC 英文法定全称占位符]. All rights reserved.`
-   - 在集中式品牌配置文件 `lib/brand.ts` 中定义常量 `COMPANY_LEGAL_NAME = "[请在此预留我的 LLC 英文法定全称占位符]"`，方便后续一键修改。
+   - `© 2026 GRAVITEX AI GLOBAL LLC. All rights reserved.`
+   - 在集中式品牌配置文件 `lib/brand.ts` 中定义常量 `COMPANY_LEGAL_NAME = "GRAVITEX AI GLOBAL LLC"`，方便后续一键修改。
 2. **商业联系方式**：
-   - `Support: contact@aicoco.xyz`（支持可点击 `mailto:contact@aicoco.xyz`）
+   - `Support: support@gravitexai.com`（支持可点击 `mailto:support@gravitexai.com`）
 3. **完备法务条款（支持 Modal 弹窗与独立路由双模式，严禁 `#` 空链接）**：
    - `Terms of Service`（标准 B2B SaaS 服务条款英文全文：涵盖账户责任、订阅计费、知识产权、责任限制等）
    - `Privacy Policy`（标准 GDPR / CCPA 隐私政策英文全文：涵盖数据收集、AI 模型数据处理、Cookie、用户权利等）
@@ -107,13 +107,13 @@
 - `components/saas/saas-header.tsx`：主工作区与商业页面通用的顶部商业化 SaaS 导航栏组件。
 - `components/saas/saas-footer.tsx`：合规版权、客服邮箱与法务条款页脚组件。
 - `app/[lang]/legal/[slug]/page.tsx`：法务条款的独立访问路由页面（兼顾爬虫与支付网关独立 URL 审核要求）。
-- `app/icon.svg` & `public/logo.svg`：全新设计的 `AICoco Studio` 现代科技风矢量品牌图标。
+- `app/icon.svg` & `public/logo.svg`：全新设计的 `GRAVITEX AI Studio` 现代科技风矢量品牌图标。
 
 ### 2. 改造现有核心文件
-- `components/workspace/brand-mark.tsx`：替换为 `AICoco Studio` 独立 SVG 品牌图标。
+- `components/workspace/brand-mark.tsx`：替换为 `GRAVITEX AI Studio` 独立 SVG 品牌图标。
 - `components/workspace/workspace.tsx`：集成顶部商业 SaaS 导航栏、底部合规 Footer、Pricing / Legal / Auth 模态框。
 - `components/chat/lobby-hero.tsx`：移除开源 MCP 宣传卡片，展示商用免费试用额度徽章（`"AI generation credits included in your workspace plan. Free trial quota active."`）与底部合规页脚。
-- `components/settings-dialog.tsx`：清理 GitHub 外链，更新 `AboutTab` 为 `AICoco Studio` 商业版本说明、订阅状态及合规法务入口。
+- `components/settings-dialog.tsx`：清理 GitHub 外链，更新 `AboutTab` 为 `GRAVITEX AI Studio` 商业版本说明、订阅状态及合规法务入口。
 - `components/quota-limit-toast.tsx`：清理 GitHub / Sponsor 按钮，替换为商用配额提示与 `Upgrade to Pro` 按钮。
 - `components/site/site-header.tsx` & `components/site/site-footer.tsx` & `components/site/site-texts.ts`：重构站点导航栏与页脚，全面去开源化并接入 Pricing 与法务链接。
 - `app/[lang]/layout.tsx`、`app/[lang]/page.tsx`、`app/[lang]/about/page.tsx`、`app/[lang]/about/texts.ts`、`app/manifest.ts`、`lib/seo.ts`：替换全站 SEO Metadata、JSON-LD 及品牌文案，并在 `/about` 页面嵌入完整 Pricing 订阅模块。

@@ -12,10 +12,10 @@
 import { createHash } from "node:crypto"
 import { readdirSync, readFileSync, writeFileSync } from "node:fs"
 
-const SITE = "https://next-ai-drawio.jiang.jp"
+const SITE = "https://gravitexai.com"
 // Cloudflare turns away requests without a browser-like user agent
 const HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; next-ai-drawio-indexnow/1.0)",
+    "User-Agent": "Mozilla/5.0 (compatible; gravitex-ai-indexnow/1.0)",
 }
 // The key is the name of the 32-character .txt file in public/
 const KEY = readdirSync("public")

@@ -297,7 +297,7 @@
         "myProviders": "マイプロバイダー",
         "inUse": "使用中",
         "listSeparator": "、",
-        "serverModelsTitle": "AICoco クラウドモデル",
+        "serverModelsTitle": "GRAVITEX AI クラウドモデル",
         "serverDefaultSummary": "AI generation credits included in your workspace plan. Free trial quota active.",
         "statusError": "{count} 個でエラー",
         "statusIncomplete": "設定が終わっていません",
